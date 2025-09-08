@@ -74,41 +74,41 @@ const Work = () => {
     {
       title: "Nature",
       images: [
-        "/photography/nature22.jpg",
-        "/photography/nature11.jpg",
-        "/photography/nature3.jpg",
-        "/photography/nature23.jpg",
-        "/photography/nature7.jpg",
-        "/photography/nature6.jpg",
-        "/photography/nature8.jpg",
-        "/photography/nature10.jpg"
+        "/photography/nature22.JPG",
+        "/photography/nature11.JPG",
+        "/photography/nature3.JPG",
+        "/photography/nature23.JPG",
+        "/photography/nature7.JPG",
+        "/photography/nature6.JPG",
+        "/photography/nature8.JPG",
+        "/photography/nature10.JPG"
       ]
     },
     {
       title: "Birds",
       images: [
-        "/photography/bird12.jpg",
-        "/photography/bird9.jpg",
-        "/photography/bird11.jpg",
-        "/photography/bird10.jpg",
-        "/photography/bird8.jpg",
-        "/photography/bird1.jpg",
-        "/photography/bird7.jpg",
-        "/photography/bird2.jpg"
+        "/photography/bird12.JPG",
+        "/photography/bird9.JPG",
+        "/photography/bird11.JPG",
+        "/photography/bird10.JPG",
+        "/photography/bird8.JPG",
+        "/photography/bird1.JPG",
+        "/photography/bird7.JPG",
+        "/photography/bird2.JPG"
       ],
       panoramicImages: [
-        "/photography/bird4.jpg",
-        "/photography/bird-bc.jpg",
-        "/photography/bird5.jpg"
+        "/photography/bird4.JPG",
+        "/photography/bird-bc.JPG",
+        "/photography/bird5.JPG"
       ]
     },
     {
       title: "People",
       images: [
-        "/photography/ppl5.jpg",
+        "/photography/ppl5.JPG",
         "/photography/ppl-7.jpg",
-        "/photography/ppl2.jpg",
-        "/photography/ppl4.jpg"
+        "/photography/ppl2.JPG",
+        "/photography/ppl4.JPG"
       ]
     }
   ];
