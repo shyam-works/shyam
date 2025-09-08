@@ -53,12 +53,12 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <button className="nav-link btn" onClick={handleProjectClick}>
-                Projects
+                Project
               </button>
             </li>
             <li className="nav-item">
               <button className="nav-link btn" onClick={handleHobbyClick}>
-                Hobbies
+                Hobbie
               </button>
             </li>
             <li className="nav-item">
