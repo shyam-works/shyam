@@ -1,49 +1,69 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsNavbarOpen(!isNavbarOpen);
+  };
+
+  const closeNavbar = () => {
+    setIsNavbarOpen(false);
+  };
 
   const handleHobbyClick = () => {
-    navigate("/work"); // Navigate to the Work page
+    closeNavbar();
+    navigate("/work");
     setTimeout(() => {
-      // Scroll to the hobby section after the page has loaded
       document.getElementById("hobby").scrollIntoView({ behavior: "smooth" });
-    }, 100); // Delay to make sure the page has loaded
+    }, 100);
   };
+
   const handleProjectClick = () => {
-    navigate("/work"); // Navigate to the Work page
+    closeNavbar();
+    navigate("/work");
     setTimeout(() => {
-      // Scroll to the hobby section after the page has loaded
       document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
-    }, 100); // Delay to make sure the page has loaded
+    }, 100);
   };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">Shyam Patel</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <Link className="navbar-brand" to="/" onClick={closeNavbar}>Shyam Patel</Link>
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          onClick={toggleNavbar}
+          aria-expanded={isNavbarOpen}
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${isNavbarOpen ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/" onClick={closeNavbar}>Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/work">Work</Link>
+              <Link className="nav-link" to="/work" onClick={closeNavbar}>Work</Link>
             </li>
-            <button className="nav-link btn" onClick={handleProjectClick}>
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={handleProjectClick}>
                 Projects
               </button>
-            <button className="nav-link btn" onClick={handleHobbyClick}>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={handleHobbyClick}>
                 Hobbies
               </button>
-            
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
             </li>
-            
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact" onClick={closeNavbar}>Contact</Link>
+            </li>
           </ul>
         </div>
       </div>
