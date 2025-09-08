@@ -1,4 +1,3 @@
-
 .navbar {
     background-color: #e94f37; /* Dark background for a professional look */
     padding: 15px 0;
@@ -58,3 +57,30 @@
     scroll-behavior: smooth;
   }
   
+/* Updated button styles to match nav links */
+.navbar-nav .nav-item .btn {
+  background: none !important;
+  border: none !important;
+  padding: 10px 15px !important; /* Match nav-link padding */
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  text-decoration: none !important;
+  color: #fff !important; /* Match nav-link white color */
+  font-size: 1rem !important; /* Match nav-link font size */
+  text-transform: uppercase !important; /* Match nav-link text transform */
+  transition: color 0.3s ease !important; /* Match nav-link transition */
+  font-family: "Kanit", serif !important; /* Match navbar font family */
+  font-weight: 500 !important; /* Match navbar font weight */
+}
+
+.navbar-nav .nav-item .btn:hover {
+  color: #393e41 !important; /* Match nav-link hover color */
+  border-bottom: 2px solid #393e41 !important; /* Match nav-link hover underline */
+  background: none !important;
+}
+
+.navbar-nav .nav-item .btn:focus {
+  box-shadow: none !important;
+  color: #fff !important; /* Keep white on focus */
+}
