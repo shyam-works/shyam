@@ -264,7 +264,7 @@ const Work = () => {
         textDecoration: 'none',
         transition: 'all 0.3s ease',
         border: '2px solid #e94f37',
-        
+        color: '#e94f37',
         backgroundColor: 'transparent',
         
       }}
