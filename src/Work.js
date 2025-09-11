@@ -213,6 +213,79 @@ const Work = () => {
             ))}
           </div>
         </div>
+
+        {/* More Projects Section */}
+<div className="more-projects-section" id="more-projects" ref={observeElement}>
+  <div 
+    className={`more-projects-card ${isVisible['more-projects'] ? 'fade-in visible' : 'fade-in'}`}
+    style={{
+      textAlign: 'center',
+      padding: '40px',
+      backgroundColor: 'transparent',
+      borderRadius: '15px',
+      marginTop: '40px',
+      marginBottom: '40px',
+      border: '1px solid #e9ecef',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)'
+    }}
+    onClick={() => window.open('https://vercel.com/shyam-patels-projects-bd445ba8', '_blank')}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-5px)';
+      e.currentTarget.style.boxShadow = '0 10px 30px #e9aea5ff'
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0)';
+      e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+    }}
+  >
+    
+    
+
+
+    <p style={{
+      fontSize: '16px',
+      color: '#777',
+      marginBottom: '25px',
+      maxWidth: '500px',
+      margin: '0 auto 25px'
+    }}>
+      Explore my complete collection of web applications, demos, and experiments on github
+    </p>
+
+    <button
+      className="btn btn-outline-primary"
+      style={{
+        padding: '12px 30px',
+        fontSize: '16px',
+        fontWeight: '500',
+        borderRadius: '8px',
+        textDecoration: 'none',
+        transition: 'all 0.3s ease',
+        border: '2px solid #e94f37',
+        
+        backgroundColor: 'transparent',
+        
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        window.open('https://github.com/Shyam-Works', '_blank');
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = '#e94f37';
+        e.target.style.color = 'white';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = 'transparent';
+        e.target.style.color = '#e94f37';
+      }}
+    >
+      <span>Explore </span>
+      <i className="fas fa-external-link-alt" style={{ marginLeft: '8px' }}></i>
+    </button>
+  </div>
+</div>
       </div>
 
       {/* Photography/Hobby Section */}
