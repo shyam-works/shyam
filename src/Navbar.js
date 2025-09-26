@@ -58,7 +58,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <button className="nav-link btn" onClick={handleHobbyClick}>
-                Hobbie
+                Hobby
               </button>
             </li>
             <li className="nav-item">
