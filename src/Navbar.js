@@ -53,7 +53,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <button className="nav-link btn" onClick={handleProjectClick}>
-                Project
+                Projects
               </button>
             </li>
             <li className="nav-item">
@@ -62,7 +62,7 @@ export default function Navbar() {
               </button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact" onClick={closeNavbar}>Contact</Link>
+              <Link className="nav-link" to="/contact" onClick={closeNavbar}>Contact me</Link>
             </li>
           </ul>
         </div>
