@@ -140,6 +140,56 @@
   transition: var(--transition-smooth);
 }
 
+/* Category Filter Buttons */
+.category-filters {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 10px 25px;
+  border: 2px solid #e94f37;
+  background-color: transparent;
+  color: #e94f37;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #e94f37;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(233, 79, 55, 0.3);
+}
+
+.filter-btn.active {
+  background-color: #e94f37;
+  color: white;
+  box-shadow: 0 4px 12px rgba(233, 79, 55, 0.4);
+}
+
+.filter-btn:focus {
+  outline: none;
+}
+
+/* Responsive design for filters */
+@media (max-width: 768px) {
+  .category-filters {
+    gap: 10px;
+  }
+  
+  .filter-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
 .experience-card:hover .experience-title {
   color: var(--accent-color);
 }
@@ -314,6 +364,7 @@
   width: 300px;
   height: 300px;
 }
+
 
 .btn-primary:hover {
   transform: translateY(-2px);
