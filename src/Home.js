@@ -103,7 +103,7 @@ export default function Home() {
           
           {/* Interactive Stats Cards */}
           <div className="stats-container">
-            <div className="stat-card" onClick={() => scrollToSection('services')}>
+            <div className="stat-card" onClick={() => window.location.href = '/work'}>
               <span className="stat-number">15+</span>
               <span className="stat-label">Projects</span>
             </div>
@@ -188,7 +188,7 @@ export default function Home() {
                 I focus on creating solutions that work beautifully and solve actual problems. 
                 Every project is an opportunity to push boundaries and deliver meaningful results.
                 <br /><br />
-                Ready to see what I've built? <a href="/work" className="work-link">Check out my work here - Let's GO!</a>
+                <a href="/work" className="work-link">Check out my work here</a>
               </p>
             </div>
           </div>
@@ -201,7 +201,7 @@ export default function Home() {
         id="services"
         ref={observeElement}
       >
-        <h2 className="section-title">What I Offer</h2>
+        <h2 className="section-title">What I can do</h2>
         <div className="services-grid">
           {data.services.map((service, index) => (
             <div 
