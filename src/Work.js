@@ -9,6 +9,7 @@ const Work = () => {
   const [imageLoadStates, setImageLoadStates] = useState({});
   const observerRef = useRef(null);
   const location = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -68,6 +69,15 @@ const Work = () => {
       [imageId]: true
     }));
   };
+
+  // Filter projects based on selected category
+  const filteredProjects = data && selectedCategory === 'All' 
+    ? data.projects 
+    : data?.projects.filter(project => project.category?.trim() === selectedCategory) || [];
+  
+  // Debug: Log to check categories
+  console.log('Selected Category:', selectedCategory);
+  console.log('Filtered Projects:', filteredProjects.map(p => ({ name: p.name, category: p.category })));
 
   // Photography data structure for better organization
   const photographyCategories = [
@@ -164,8 +174,6 @@ const Work = () => {
                     {experience.description}
                   </p>
                 </div>
-
-                
               </div>
             ))}
           </div>
@@ -174,9 +182,38 @@ const Work = () => {
         {/* Projects Section */}
         <div className="projects-section" id="projects" ref={observeElement}>
           <h1 className="page-title">My Projects</h1>
+          
+          {/* Category Filter Buttons */}
+          <div className="category-filters mb-4">
+            <button 
+              className={`filter-btn ${selectedCategory === 'All' ? 'active' : ''}`}
+              onClick={() => setSelectedCategory('All')}
+            >
+              All Projects
+            </button>
+            <button 
+              className={`filter-btn ${selectedCategory === 'Developer' ? 'active' : ''}`}
+              onClick={() => setSelectedCategory('Developer')}
+            >
+              Development
+            </button>
+            <button 
+              className={`filter-btn ${selectedCategory === 'Data analyst' ? 'active' : ''}`}
+              onClick={() => setSelectedCategory('Data analyst')}
+            >
+              Data Analytics
+            </button>
+            <button 
+              className={`filter-btn ${selectedCategory === 'System Designer' ? 'active' : ''}`}
+              onClick={() => setSelectedCategory('System Designer')}
+            >
+              System Design
+            </button>
+          </div>
+
           <div className="row">
-            {data.projects.map((project, index) => (
-              <div className="col-md-4 mb-4" key={project.index}>
+            {filteredProjects.map((project, index) => (
+              <div className="col-md-4 mb-4" key={`project-${index}-${project.name}`}>
                 <div 
                   className={`card h-100 ${isVisible.projects ? 'fade-in visible' : 'fade-in'}`}
                   style={{ animationDelay: `${index * 0.1}s` }}
@@ -215,77 +252,72 @@ const Work = () => {
         </div>
 
         {/* More Projects Section */}
-<div className="more-projects-section" id="more-projects" ref={observeElement}>
-  <div 
-    className={`more-projects-card ${isVisible['more-projects'] ? 'fade-in visible' : 'fade-in'}`}
-    style={{
-      textAlign: 'center',
-      padding: '40px',
-      backgroundColor: 'transparent',
-      borderRadius: '15px',
-      marginTop: '40px',
-      marginBottom: '40px',
-      border: '1px solid #e9ecef',
-      transition: 'all 0.3s ease',
-      cursor: 'pointer',
-      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)'
-    }}
-    onClick={() => window.open('https://vercel.com/shyam-patels-projects-bd445ba8', '_blank')}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = 'translateY(-5px)';
-      e.currentTarget.style.boxShadow = '0 10px 30px #e9aea5ff'
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
-    }}
-  >
-    
-    
+        <div className="more-projects-section" id="more-projects" ref={observeElement}>
+          <div 
+            className={`more-projects-card ${isVisible['more-projects'] ? 'fade-in visible' : 'fade-in'}`}
+            style={{
+              textAlign: 'center',
+              padding: '40px',
+              backgroundColor: 'transparent',
+              borderRadius: '15px',
+              marginTop: '40px',
+              marginBottom: '40px',
+              border: '1px solid #e9ecef',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer',
+              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)'
+            }}
+            onClick={() => window.open('https://vercel.com/shyam-patels-projects-bd445ba8', '_blank')}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-5px)';
+              e.currentTarget.style.boxShadow = '0 10px 30px #e9aea5ff'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }}
+          >
+            <p style={{
+              fontSize: '16px',
+              color: '#777',
+              marginBottom: '25px',
+              maxWidth: '500px',
+              margin: '0 auto 25px'
+            }}>
+              Explore my complete collection of web applications, demos, and experiments on github
+            </p>
 
-
-    <p style={{
-      fontSize: '16px',
-      color: '#777',
-      marginBottom: '25px',
-      maxWidth: '500px',
-      margin: '0 auto 25px'
-    }}>
-      Explore my complete collection of web applications, demos, and experiments on github
-    </p>
-
-    <button
-      className="btn btn-outline-primary"
-      style={{
-        padding: '12px 30px',
-        fontSize: '16px',
-        fontWeight: '500',
-        borderRadius: '8px',
-        textDecoration: 'none',
-        transition: 'all 0.3s ease',
-        border: '2px solid #e94f37',
-        color: '#e94f37',
-        backgroundColor: 'transparent',
-        
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-        window.open('https://github.com/Shyam-Works', '_blank');
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.backgroundColor = '#e94f37';
-        e.target.style.color = 'white';
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.backgroundColor = 'transparent';
-        e.target.style.color = '#e94f37';
-      }}
-    >
-      <span>Explore </span>
-      <i className="fas fa-external-link-alt" style={{ marginLeft: '8px' }}></i>
-    </button>
-  </div>
-</div>
+            <button
+              className="btn btn-outline-primary"
+              style={{
+                padding: '12px 30px',
+                fontSize: '16px',
+                fontWeight: '500',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
+                border: '2px solid #e94f37',
+                color: '#e94f37',
+                backgroundColor: 'transparent',
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://github.com/Shyam-Works', '_blank');
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#e94f37';
+                e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#e94f37';
+              }}
+            >
+              <span>Explore </span>
+              <i className="fas fa-external-link-alt" style={{ marginLeft: '8px' }}></i>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Photography/Hobby Section */}
