@@ -123,15 +123,15 @@
     {
       "role": "QA Tester",
       "company": "Freelance",
-      "duration": "August 2025 - September 2025",
+      "duration": "August 2025 - Present",
       "description": "Worked as a QA Tester focusing on comprehensive quality assurance across multiple product features using industry-standard tools like Selenium for automated testing and JIRA for bug tracking and project management. Conducted thorough functionality testing to ensure smooth performance, identified and documented bugs with clear reporting for development teams, and provided UI/UX improvement suggestions. Collaborated closely with cross-functional teams to maintain product consistency and reliability, while monitoring daily updates and retesting fixes to confirm stability. This role enhanced my attention to detail, effective cross-team communication skills, and understanding that quality assurance is an ongoing process integral to the entire development lifecycle.",
       "image": "studentScholars.jpg"
     },
     {
   "role": "Web Developer (Volunteer)",
   "company": "Torrent Power",
-  "duration": "March 2025 - April 2025",
-  "description": "Developed a responsive React application to streamline contractor order management for electronic parts. Implemented categorized part listings with quantity input functionality and integrated automated email processing to send order data in table format. Successfully replaced manual ordering systems with a digital workflow, significantly improving operational efficiency and eliminating manual data entry for the client by achieving average 1000 order/month.",
+  "duration": "May 2024 - Sept 2025",
+  "description": " Identified a need to modernize manual ordering processes for field teams. Designed, built, and deployed a centralized web portal now used by staff at 3 locations to manage electronic component orders. Replaced manual tracking with a secure web-based ordering system. System currently handles 2,000+ monthly orders across multiple sites. Reduced data entry errors by approx. 40% by automating stock validation",
   "image": "torrent-power.jpg"
 },
     {
