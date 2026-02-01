@@ -2,7 +2,7 @@
   "name": "Shyam Patel",
   "photo": "profile2.jpg",
   "me": "me.jpg",
-  "intro": "I am a dedicated and passionate IT professional with a strong foundation in web development, data analysis, and software testing. I thrive on solving complex problems and continuously learning new technologies to enhance my skill set. My goal is to leverage my technical expertise and creativity to build innovative solutions that drive business success and improve user experiences.",
+  "intro": "Solving complex problems through clean code and data-driven insights. Dedicated to building innovative tools that empower users and drive meaningful growth",
   "education": "Advanced Diploma in Computer Programming - Seneca Polytechnic College",
   "services": [
     {
@@ -22,133 +22,161 @@
 }
 
   ],
-  "projects": [
-        {
-          "index": 0,
-          "category": "Developer",
-          "name": "Fragments API Server",
-          "description": "Built and deployed a production-ready cloud-native Fragments API Server with a complete Progressive Web Application frontend on AWS. The system supports full CRUD operations for multiple fragment formats (text, JSON, images) with real-time format conversion, offline capabilities, and secure authentication. Designed as a fully containerized microservices architecture using Docker, Amazon ECS, DynamoDB, S3, and Cognito, ensuring scalability and zero-downtime deployments with CI/CD through GitHub Actions.",
-          "image": "cloud.png",
-          "link": "https://github.com/yourusername/fragments-api-server"
-    },
-    {
-      "index": 0,
-      "category": "Developer",
-      "name": "Backend System",
-      "description": "Built a comprehensive video-sharing platform backend with secure user authentication, profile management, and video upload functionality. Implemented interactive features including comments, likes, subscriptions, and social updates, plus an analytics dashboard tracking user engagement metrics. Utilized MongoDB Atlas for data management and validated all API endpoints through comprehensive testing.",
-      "image": "backend.jpg",
-      "link": "https://github.com/Shyam-Works/backend"
-    },
-    {
-  "index": 1,
-  "category": "Developer",
-  "name": "Hotel Reservation System",
-  "description": "Developed a Java-based hotel reservation system using JavaFX with MVC architecture. Features dual interfaces: customer portal for booking with automatic payment calculation, and admin dashboard with full CRUD operations, discount management, and reporting analytics. Implemented SQLite for data persistence and Java Logger for system activity tracking.",
-  "image": "hotel.png",
-  "link": "https://github.com/yourusername/hotel-reservation-system"
-},
-    {
-      "index": 0,
-      "category": "Developer",
-      "name": "Expense Tracker App",
-      "description": "Developed Xpense expense tracker with Next.js/MongoDB stack, featuring secure authentication, categorized transaction management, and interactive analytics dashboard. Created financial insights including spending trends, category breakdowns, and income vs. savings analysis to support user budgeting decisions.",
-      "image": "Xpense.jpg",
-      "link": "https://xpense-five.vercel.app/"
-    },
-    {
-      "index": 1,
-      "category": "Developer",
-      "name": "Metropolitan Museum of Art ",
-      "description": "Developed Next.js web application for Metropolitan Museum art exploration with secure user authentication and MongoDB integration. Created advanced search capabilities, personalized user features (favorites, history tracking), and session management while consuming external API data for dynamic content delivery.",
-      "image": "museum.jpg",
-      "link": "https://museum-app-jade.vercel.app/"
-    },
-    {
-      "index": 3,
-      "category": "Data analyst",
-      "name": "Power BI Data Professional Survey Dashboard",
-      "description": "comprehensive Power BI dashboard analyzing survey data from 600+ data professionals. Implemented data modeling and interactive visualizations to showcase salary comparisons by role, work-life balance metrics, programming language preferences, and regional participation trends, delivering actionable insights for strategic workforce planning and decision-making.",
-      "image": "data1.jpg",
-      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7281293300400103426/"
-    },
-    {
-      "index": 4,
-      "category": "Data analyst",
-      "name": "British Airways Customer Review Analysis Dashboard",
-      "description": "Built interactive Tableau dashboard analyzing British Airways customer reviews across key service metrics including food quality, cabin staff service, seat comfort, and value. Developed visualizations for trend analysis, geographic rating distribution, aircraft performance comparisons, and traveler segmentation to identify improvement opportunities and enhance customer experience.",
-      "image": "airline.jpg",
-      "link": "https://public.tableau.com/app/profile/shyam.patel8871/viz/Book2_17357723248620/Dashboard1"
-    },
-    {
-      "index": 5,
-      "category": "Developer",
-      "name": "Delivery Truck Route Testing Project",
-      "description": "Developed a C++ application to optimize delivery truck routes, conducting acceptance, integration, and logfile testing using Visual Studio for performance validation. Successfully uploaded the project to GitHub, demonstrating strong skills in testing, debugging, and collaborating on real-world software solutions.",
-      "image": "truck2.jpg"
-    },
-    {
-      "index": 6,
-      "category": "Developer",
-      "name": "Shopping Cart System",
-      "description": "Engineered a robust shopping cart system using C++ and SQL, encompassing secure customer login, product validation, and efficient order processing functionalities. Integrated with an Oracle database to manage product data and streamline checkout operations, ensuring data integrity and optimized performance for high-volume transactions.",
-      "image": "shopping.jpg"
-    },
-    {
-  "index": 7,
-  "category": "System Designer",
-  "name": "Scalable Cloud Architecture",
-  "description": "Designed a scalable, fault-tolerant system architecture demonstrating real-world cloud design principles. The setup includes Redis caching for rapid data retrieval, a Load Balancer and CDN for global delivery, AWS SQS for background processing, and microservices for authentication and payments managed via an API Gateway. Implemented event-driven workflows, regional deployments with Anycast for low-latency access, and a database failover mechanism with caching fallback to ensure uninterrupted performance.",
-  "image": "systemdesign.png",
-  "link": "https://drive.google.com/drive/folders/1Xl49YQ342kZe5KqxVpy7i9egSQII4T-j?usp=sharing"
-},
-{
-  "index": 8,
-  "category": "System Designer",
-  "name": "Notification System Design",
-  "description": "Architected a scalable notification delivery system supporting email, in-app, and push notifications. The design uses AWS SQS for message queuing, SNS for event distribution, and a Load Balancer for efficient traffic routing. Implemented dead-letter queues for failed message handling, event-driven processing for user actions, and a decision flow that adapts to user preferences like mute, DND, or mention-based alerts—ensuring reliable, context-aware notifications at scale.",
-  "image": "notificationdesign.png",
-  "link": "https://drive.google.com/drive/folders/1Xl49YQ342kZe5KqxVpy7i9egSQII4T-j?usp=sharing"
-}
-
-
-  ],
+"projects": [
+  {
+    "index": 0,
+    "category": "Developer",
+    "name": "AgroCare AI",
+    "description": "An intelligent AI-powered web platform designed to revolutionize modern farming. Features include a real-time plant disease diagnostic tool using image recognition, a personalized health-tracking dashboard, and an integrated marketplace for sustainable agricultural tools. Built with a vision to create a connected community for both beginners and professional farmers.",
+    "image": "agrocare.png",
+    "link": "https://agrocaresolutions.vercel.app/"
+  },
+  {
+    "index": 1,
+    "category": "Developer",
+    "name": "PromptLover ❤️",
+    "description": "A community-driven library for AI creative prompts, solving the 'gatekeeping' problem in AI art. Built a clean, searchable platform where users can instantly access high-quality prompts for cinematic product shots, outfit edits, and background changes. Attracted thousands of users shortly after launch by providing a seamless 'explore and copy' experience for Midjourney, Gemini, and OpenAI creators.",
+    "image": "promptlover.png",
+    "link": "https://promptlover.vercel.app/" 
+  },
+  {
+    "index": 2,
+    "category": "Developer",
+    "name": "Fragments API Server",
+    "description": "Built and deployed a production-ready cloud-native Fragments API Server with a complete Progressive Web Application frontend on AWS. The system supports full CRUD operations for multiple fragment formats (text, JSON, images) with real-time format conversion, offline capabilities, and secure authentication. Designed as a fully containerized microservices architecture using Docker, Amazon ECS, DynamoDB, S3, and Cognito, ensuring scalability and zero-downtime deployments with CI/CD through GitHub Actions.",
+    "image": "cloud.png",
+    "link": "https://github.com/yourusername/fragments-api-server"
+  },
+  {
+    "index": 3,
+    "category": "Developer",
+    "name": "Backend System",
+    "description": "Built a comprehensive video-sharing platform backend with secure user authentication, profile management, and video upload functionality. Implemented interactive features including comments, likes, subscriptions, and social updates, plus an analytics dashboard tracking user engagement metrics. Utilized MongoDB Atlas for data management and validated all API endpoints through comprehensive testing.",
+    "image": "backend.jpg",
+    "link": "https://github.com/Shyam-Works/backend"
+  },
+  {
+    "index": 4,
+    "category": "Developer",
+    "name": "Hotel Reservation System",
+    "description": "Developed a Java-based hotel reservation system using JavaFX with MVC architecture. Features dual interfaces: customer portal for booking with automatic payment calculation, and admin dashboard with full CRUD operations, discount management, and reporting analytics. Implemented SQLite for data persistence and Java Logger for system activity tracking.",
+    "image": "hotel.png",
+    "link": "https://github.com/yourusername/hotel-reservation-system"
+  },
+  {
+    "index": 5,
+    "category": "Developer",
+    "name": "Expense Tracker App",
+    "description": "Developed Xpense expense tracker with Next.js/MongoDB stack, featuring secure authentication, categorized transaction management, and interactive analytics dashboard. Created financial insights including spending trends, category breakdowns, and income vs. savings analysis to support user budgeting decisions.",
+    "image": "Xpense.jpg",
+    "link": "https://xpense-five.vercel.app/"
+  },
+  {
+    "index": 6,
+    "category": "Developer",
+    "name": "Metropolitan Museum of Art",
+    "description": "Developed Next.js web application for Metropolitan Museum art exploration with secure user authentication and MongoDB integration. Created advanced search capabilities, personalized user features (favorites, history tracking), and session management while consuming external API data for dynamic content delivery.",
+    "image": "museum.jpg",
+    "link": "https://museum-app-jade.vercel.app/"
+  },
+  {
+    "index": 7,
+    "category": "Data analyst",
+    "name": "Power BI Data Professional Survey Dashboard",
+    "description": "comprehensive Power BI dashboard analyzing survey data from 600+ data professionals. Implemented data modeling and interactive visualizations to showcase salary comparisons by role, work-life balance metrics, programming language preferences, and regional participation trends, delivering actionable insights for strategic workforce planning and decision-making.",
+    "image": "data1.jpg",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7281293300400103426/"
+  },
+  {
+    "index": 8,
+    "category": "Data analyst",
+    "name": "British Airways Customer Review Analysis Dashboard",
+    "description": "Built interactive Tableau dashboard analyzing British Airways customer reviews across key service metrics including food quality, cabin staff service, seat comfort, and value. Developed visualizations for trend analysis, geographic rating distribution, aircraft performance comparisons, and traveler segmentation to identify improvement opportunities and enhance customer experience.",
+    "image": "airline.jpg",
+    "link": "https://public.tableau.com/app/profile/shyam.patel8871/viz/Book2_17357723248620/Dashboard1"
+  },
+  {
+    "index": 9,
+    "category": "Developer",
+    "name": "Delivery Truck Route Testing Project",
+    "description": "Developed a C++ application to optimize delivery truck routes, conducting acceptance, integration, and logfile testing using Visual Studio for performance validation. Successfully uploaded the project to GitHub, demonstrating strong skills in testing, debugging, and collaborating on real-world software solutions.",
+    "image": "truck2.jpg"
+  },
+  {
+    "index": 10,
+    "category": "Developer",
+    "name": "Shopping Cart System",
+    "description": "Engineered a robust shopping cart system using C++ and SQL, encompassing secure customer login, product validation, and efficient order processing functionalities. Integrated with an Oracle database to manage product data and streamline checkout operations, ensuring data integrity and optimized performance for high-volume transactions.",
+    "image": "shopping.jpg"
+  },
+  {
+    "index": 11,
+    "category": "System Designer",
+    "name": "Scalable Cloud Architecture",
+    "description": "Designed a scalable, fault-tolerant system architecture demonstrating real-world cloud design principles. The setup includes Redis caching for rapid data retrieval, a Load Balancer and CDN for global delivery, AWS SQS for background processing, and microservices for authentication and payments managed via an API Gateway. Implemented event-driven workflows, regional deployments with Anycast for low-latency access, and a database failover mechanism with caching fallback to ensure uninterrupted performance.",
+    "image": "systemdesign.png",
+    "link": "https://drive.google.com/drive/folders/1Xl49YQ342kZe5KqxVpy7i9egSQII4T-j?usp=sharing"
+  },
+  {
+    "index": 12,
+    "category": "System Designer",
+    "name": "Notification System Design",
+    "description": "Architected a scalable notification delivery system supporting email, in-app, and push notifications. The design uses AWS SQS for message queuing, SNS for event distribution, and a Load Balancer for efficient traffic routing. Implemented dead-letter queues for failed message handling, event-driven processing for user actions, and a decision flow that adapts to user preferences like mute, DND, or mention-based alerts—ensuring reliable, context-aware notifications at scale.",
+    "image": "notificationdesign.png",
+    "link": "https://drive.google.com/drive/folders/1Xl49YQ342kZe5KqxVpy7i9egSQII4T-j?usp=sharing"
+  }
+],
   "experience": [
-    {
-      "role": "Coding Tutor",
-      "company": "StudentScholars",
-      "duration": "August 2024 - Present",
-      "description": "I work as a tutor at Student Scholars, specializing in Web Development, Python, and Scratch. My goal is to provide personalized support to students, helping them work through challenges and fostering a love for coding. By resolving their doubts and guiding them through hands-on learning, I aim to make their experience engaging and enriching. Through teaching, I also continue to deepen my own knowledge of these subjects, making the learning process mutually beneficial.",
-      "image": "studentScholars.jpg"
-    },
-    {
-      "role": "QA Tester",
-      "company": "Freelance",
-      "duration": "August 2025 - Present",
-      "description": "Worked as a QA Tester focusing on comprehensive quality assurance across multiple product features using industry-standard tools like Selenium for automated testing and JIRA for bug tracking and project management. Conducted thorough functionality testing to ensure smooth performance, identified and documented bugs with clear reporting for development teams, and provided UI/UX improvement suggestions. Collaborated closely with cross-functional teams to maintain product consistency and reliability, while monitoring daily updates and retesting fixes to confirm stability. This role enhanced my attention to detail, effective cross-team communication skills, and understanding that quality assurance is an ongoing process integral to the entire development lifecycle.",
-      "image": "studentScholars.jpg"
-    },
-    {
-  "role": "Web Developer (Volunteer)",
-  "company": "Torrent Power",
-  "duration": "May 2024 - Sept 2025",
-  "description": " Identified a need to modernize manual ordering processes for field teams. Designed, built, and deployed a centralized web portal now used by staff at 3 locations to manage electronic component orders. Replaced manual tracking with a secure web-based ordering system. System currently handles 2,000+ monthly orders across multiple sites. Reduced data entry errors by approx. 40% by automating stock validation",
-  "image": "torrent-power.jpg"
-},
-    {
-      "role": "AI Trainer",
-      "company": "Outlier AI",
-      "duration": "November 2024 - February 2025",
-      "description": "Worked as an AI Trainer ensuring AI-generated responses are accurate and aligned with user expectations. Responsibilities included reviewing text and code to improve AI performance, performing code validation, and training models to enhance content analysis and generation capabilities. Collaborated with cross-functional teams to optimize AI efficiency and continuously refine models to meet high quality standards.",
-      "image": "CTA-8.png"
-    },
-    {
-      "role": "Sales Associate",
-      "company": "7-Eleven",
-      "duration": "November 2023 - Present",
-      "description": "As a Sales Associate at 7-Eleven, I developed strong customer service skills by understanding and addressing customer needs. My role involved assisting customers with their purchases, handling cash transactions, and ensuring a smooth shopping experience. Through daily interactions, I learned how to communicate effectively, solve problems quickly, and adapt to various customer preferences. This experience has reinforced my ability to work under pressure, manage multiple tasks efficiently, and think critically. These skills are directly transferable to my career in IT, where problem-solving, attention to detail, and communication are key in developing software solutions and providing technical support.",
-      "image": "7 11.jpg"
-    }
-  ],
+  {
+    "role": "STEM Tutor",
+    "company": "Megamind Learning Centre",
+    "duration": "October 2025 - Present",
+    "description": "Teaching Python, Scratch, Web Design, and Roblox game development to students in grades 3–12. I develop engaging, hands-on lessons designed to build programming, problem-solving, and creative thinking skills while guiding students through interactive projects and games to make coding accessible and fun.",
+    "image": "megamind.jpg" 
+  },
+  {
+    "role": "Coding Instructor",
+    "company": "Lifetime Skills Academy",
+    "duration": "October 2025 - Present",
+    "description": "Instructing students in grades 1–6 on coding and robotics through hands-on projects using Scratch and LEGO robotics. My goal is to help children develop computational thinking, creativity, and teamwork through fun, project-based learning.",
+    "image": "lifetime.jpg"
+  },
+  {
+    "role": "Coding Tutor",
+    "company": "StudentScholars",
+    "duration": "August 2024 - Present",
+    "description": "I work as a tutor specializing in Web Development, Python, and Scratch. My goal is to provide personalized support to students, helping them work through challenges and fostering a love for coding. Through hands-on learning and resolving technical doubts, I aim to make their experience engaging and enriching.",
+    "image": "studentScholars.jpg"
+  },
+  {
+    "role": "QA Tester",
+    "company": "Freelance",
+    "duration": "August 2025 - September 2025",
+    "description": "Focused on comprehensive quality assurance using industry-standard tools like Selenium for automated testing and JIRA for bug tracking. Conducted thorough functionality testing, documented bugs with clear reporting, and provided UI/UX improvement suggestions while collaborating closely with cross-functional teams to maintain reliability.",
+    "image": "qa_tester.jpg"
+  },
+  {
+    "role": "Web Developer (Volunteer)",
+    "company": "Torrent Power",
+    "duration": "March 2025 - April 2025",
+    "description": "Developed a responsive React application to streamline contractor order management. Implemented categorized part listings and integrated automated email processing, successfully replacing manual systems with a digital workflow and improving operational efficiency for 1000+ orders per month.",
+    "image": "torrent-power.jpg"
+  },
+  {
+    "role": "AI Trainer",
+    "company": "Outlier AI",
+    "duration": "November 2024 - February 2025",
+    "description": "Ensuring AI-generated responses are accurate and aligned with user expectations. Responsibilities included reviewing text and code to improve performance, performing code validation, and training models to enhance content analysis and generation capabilities.",
+    "image": "outlier.jpg"
+  },
+  {
+    "role": "Sales Associate",
+    "company": "7-Eleven",
+    "duration": "November 2023 - Present",
+    "description": "Developed strong customer service and problem-solving skills in a high-pressure environment. Responsible for cash transactions and addressing customer needs efficiently, skills that directly transfer to technical support and collaborative software development environments.",
+    "image": "7eleven.jpg"
+  }
+],
   "skills": [
   { "name": "HTML", "icon": "fab fa-html5" },
   { "name": "CSS", "icon": "fab fa-css3-alt" },
