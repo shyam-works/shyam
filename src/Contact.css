@@ -1,77 +1,204 @@
-body {
-    background-color: #f8f9fa;
-    font-family: "Poppins", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --apple-blue: #0071e3;
+  --apple-text: #1d1d1f;
+  --apple-bg: #ffffff;
+  --apple-gray: #f5f5f7;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-root {
+  min-height: 100vh;
+  background: var(--apple-bg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+  overflow-x: hidden;
+}
+
+.contact-editorial-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+/* LEFT SIDE: EDITORIAL */
+.contact-tag {
+  color: var(--apple-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.contact-display-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+}
+
+.blue-text { color: var(--apple-blue); }
+
+.contact-intro {
+  font-size: 1.2rem;
+  color: #6e6e73;
+  line-height: 1.6;
+  margin-bottom: 50px;
+}
+
+.method-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.method-item i {
+  width: 50px;
+  height: 50px;
+  background: var(--apple-gray);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--apple-blue);
+  font-size: 1.2rem;
+}
+
+.method-item span {
+  display: block;
+  font-size: 0.8rem;
+  color: #86868b;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.method-item p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.social-presence span {
+  font-weight: 600;
+  color: #86868b;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.social-pills {
+  display: flex;
+  gap: 15px;
+}
+
+.social-pills a {
+  width: 45px;
+  height: 45px;
+  background: var(--apple-text);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s var(--ease);
+}
+
+.social-pills a:hover {
+  background: var(--apple-blue);
+  transform: translateY(-5px);
+}
+
+/* RIGHT SIDE: THE FORM */
+.apple-form {
+  background: var(--apple-gray);
+  padding: 50px;
+  border-radius: 32px;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: var(--apple-text);
+}
+
+.input-group input, .input-group textarea {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d2d2d7;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: 0.3s var(--ease);
+}
+
+.input-group input:focus, .input-group textarea:focus {
+  outline: none;
+  border-color: var(--apple-blue);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+}
+
+.apple-submit-btn {
+  width: 100%;
+  background: var(--apple-blue);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.apple-submit-btn:hover {
+  background: #0077ed;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2);
+}
+
+/* STATUS MESSAGES */
+.apple-status {
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 600;
+}
+
+.apple-status.success { background: #eefdf3; color: #1e7e34; }
+.apple-status.error { background: #fdf2f2; color: #dc3545; }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 991px) {
+  .contact-editorial-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
   }
-  
-  .contact-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: "Kanit", serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .contact-form h2 {
-    font-size: 26px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .contact-form p {
-    font-size: 14px;
-    color: #555;
-    text-align: center;
-  }
-  
-  /* Left-align labels */
-  .contact-form .form-label {
-    text-align: left;
-    display: block;
-    font-weight: 600;
-  }
-  
-  /* Center the submit button and control width */
-  .contact-form .btn-submit {
-    display: block;
-    width: 150px;
-    margin: 0 auto;
-  }
-  
-  .contact-info {
-    margin-top: 30px;
-    text-align: center;
-  }
-  
-  .contact-info h3 {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .contact-info p {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  .social-icons {
-    margin-top: 10px;
-  }
-  
-  .social-icons a {
-    font-size: 24px;
-    margin: 0 10px;
-    color: #333;
-    transition: color 0.3s ease;
-  }
-  
-  .social-icons a:hover {
-    color: #007bff;
-  }
-  
-  i {
-    margin-right: 8px;
-  }
-  
+  .apple-form { padding: 30px; }
+  .contact-root { padding: 80px 0; }
+}
