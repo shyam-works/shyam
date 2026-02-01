@@ -1,86 +1,135 @@
-.navbar {
-    background-color: #e94f37; /* Dark background for a professional look */
-    padding: 15px 0;
-    font-family: "Kanit", serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .navbar-light .navbar-brand {
-    color: #fff;
-    font-size: 1.35rem; /* Larger font size for brand */
-    text-transform: uppercase; /* Makes the brand text more bold */
-    font-weight: 700;
-  }
-  
-  .navbar-light .navbar-nav .nav-link {
-    color: #fff;
-    font-size: 1rem;
-    padding: 10px 15px;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar-light .navbar-nav .nav-link:hover {
-    color: #393e41; /* Add hover color effect */
-    border-bottom: 2px solid #393e41; /* Adds an underline on hover */
-  }
-  
-  .navbar-light .navbar-nav .nav-item.active .nav-link {
-    color: #ff6f61; /* Active item color */
-  }
-  
-  .navbar-toggler {
-    border-color: #fff;
-  }
-  
-  .navbar-toggler-icon {
-    background-color: #fff;
-  }
-  
-  @media (max-width: 991px) {
-    .navbar-collapse {
-      text-align: center; /* Center navbar items on mobile */
-    }
-    .navbar-nav {
-      margin-top: 10px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .navbar-brand {
-      font-size: 1.5rem; /* Slightly smaller font on smaller screens */
-    }
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-  
-/* Updated button styles to match nav links */
-.navbar-nav .nav-item .btn {
-  background: none !important;
-  border: none !important;
-  padding: 10px 15px !important; /* Match nav-link padding */
-  text-align: center !important;
-  display: block !important;
-  width: 100% !important;
-  text-decoration: none !important;
-  color: #fff !important; /* Match nav-link white color */
-  font-size: 1rem !important; /* Match nav-link font size */
-  text-transform: uppercase !important; /* Match nav-link text transform */
-  transition: color 0.3s ease !important; /* Match nav-link transition */
-  font-family: "Kanit", serif !important; /* Match navbar font family */
-  font-weight: 500 !important; /* Match navbar font weight */
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.7);
+  --nav-blur: 20px;
+  --nav-text: #1d1d1f;
+  --nav-accent: #0071e3; /* Trust Blue */
+  --nav-height: 70px;
 }
 
-.navbar-nav .nav-item .btn:hover {
-  color: #393e41 !important; /* Match nav-link hover color */
-  border-bottom: 2px solid #393e41 !important; /* Match nav-link hover underline */
-  background: none !important;
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
 }
 
-.navbar-nav .nav-item .btn:focus {
-  box-shadow: none !important;
-  color: #fff !important; /* Keep white on focus */
+/* Frosted Glass Effect on Scroll */
+.navbar-scrolled {
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  height: 60px; /* Shrinks slightly for a premium feel */
+}
+
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--nav-text);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.logo-dot { color: var(--nav-accent); }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-item {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: opacity 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-item:hover {
+  opacity: 0.6;
+}
+
+/* Contact Button - Apple Style */
+.nav-contact-btn {
+  background: var(--nav-text);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.nav-contact-btn:hover {
+  background: var(--nav-accent);
+  transform: scale(1.05);
+}
+
+.btn-reset { font-family: inherit; }
+
+/* Hamburger Menu for Mobile */
+.nav-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bar {
+  width: 24px;
+  height: 2px;
+  background: var(--nav-text);
+  transition: 0.3s;
+}
+
+/* Mobile View */
+@media (max-width: 991px) {
+  .nav-menu-btn { display: flex; }
+
+  .nav-links-wrapper {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+  }
+
+  .nav-links-wrapper.show { top: 0; }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .nav-item { font-size: 1.8rem; font-weight: 600; }
 }
