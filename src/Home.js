@@ -4,6 +4,7 @@ import "./Home.css";
 export default function Home() {
   const [data, setData] = useState(null);
   const [isVisible, setIsVisible] = useState({});
+  const [isHovering, setIsHovering] = useState(false);
   const observerRef = useRef(null);
   const cursorRef = useRef(null);
 
@@ -35,12 +36,25 @@ export default function Home() {
   useEffect(() => {
     const moveCursor = (e) => {
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(${isHovering ? 2.5 : 1})`;
       }
     };
+
+    const handleHover = (e) => {
+      if (e.target.closest('button') || e.target.closest('.tech-glow') || e.target.closest('a')) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
     window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
-  }, []);
+    window.addEventListener("mouseover", handleHover);
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mouseover", handleHover);
+    };
+  }, [isHovering]);
 
   if (!data) return <div className="apple-loader"><span></span></div>;
 
@@ -48,7 +62,6 @@ export default function Home() {
     <div className="apple-root">
       <div className="dot-cursor" ref={cursorRef}></div>
 
-      {/* Hero: Pushed down with sleek reveal */}
       <section className="apple-hero" id="hero">
         <div className="hero-content">
           <h1 className="hero-title fade-up-delay-1">
@@ -56,7 +69,6 @@ export default function Home() {
             Design for <span className="gradient-text">Everyone.</span>
           </h1>
           
-          {/* Sleek reveal animation for intro text */}
           <div className="hero-intro-wrapper fade-up-delay-2">
             <p className="hero-intro sleek-reveal">
               {data.intro}
@@ -77,17 +89,17 @@ export default function Home() {
       </section>
 
       <div className="apple-stats-bar fade-up-delay-3">
-  <div className="stats-container" onClick={() => window.location.href='/work'}>
-    <div className="stat-item">
-      <span className="stat-number">15<span className="plus">+</span></span>
-      <span className="stat-label">Innovative Projects Built <span>→</span></span>
-    </div>
-    <div className="stat-badge">
-      Available for new opportunities
-    </div>
-  </div>
-</div>
-      {/* About: Highlighted Keywords */}
+        <div className="stats-container" onClick={() => window.location.href='/work'}>
+          <div className="stat-item">
+            <span className="stat-number">15<span className="plus">+</span></span>
+            <span className="stat-label">Innovative Projects Built <span>→</span></span>
+          </div>
+          <div className="stat-badge">
+            Available for new opportunities
+          </div>
+        </div>
+      </div>
+
       <section className="apple-section" id="about" ref={observeElement}>
         <div className={`apple-grid ${isVisible.about ? 'active' : ''}`}>
           <div className="apple-img-wrap">
@@ -101,14 +113,13 @@ export default function Home() {
             </h2>
             <p className="section-p">
               I'm <strong>{data.name}</strong>. From building AI for farmers to 
-              teaching at StudentScholars, I believe technology should be 
+              teaching students, I believe technology should be 
               accessible, powerful, and clean.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Expertise */}
       <section className="apple-section dark-bg" id="services" ref={observeElement}>
         <div className="container">
           <span className="section-tag center">Capabilities</span>
@@ -127,14 +138,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills */}
       <section className="apple-section" id="skills" ref={observeElement}>
         <div className="container center">
           <span className="section-tag center">Stack</span>
           <h2 className="section-title center">Tools I use.</h2>
           <div className={`apple-skills ${isVisible.skills ? 'active' : ''}`}>
             {data.skills.map((skill, i) => (
-              <div key={i} className="apple-pill">
+              <div key={i} className="apple-pill tech-glow">
                 <i className={skill.icon}></i> {skill.name}
               </div>
             ))}
@@ -142,7 +152,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Achievements */}
       <section className="apple-section" id="achievements" ref={observeElement}>
         <div className="container">
           <span className="section-tag center">Impact</span>
@@ -165,38 +174,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="apple-section footer-cta" id="contact" ref={observeElement}>
+        <div className={`container center ${isVisible.contact ? 'active' : ''}`}>
+          <h2 className="section-title">Let’s build the <br/> <span className="gradient-text">next big thing</span> together.</h2>
+          <p className="section-p">
+            Currently open for new opportunities in Software Development and Data Analysis. 
+            Based in Ontario, Canada.
+          </p>
+          <div className="cta-group">
+            <button className="apple-btn primary" onClick={() => window.location.href='mailto:shyampatel97@gmail.com'}>
+              Get in touch
+            </button>
+            <button className="apple-btn secondary" onClick={() => window.location.href='/work'}>
+              See all 15+ projects
+            </button>
+          </div>
+        </div>
+      </section>
 
-      {/* NEW: Final CTA Section */}
-<section className="apple-section footer-cta" id="contact" ref={observeElement}>
-  <div className={`container center ${isVisible.contact ? 'active' : ''}`}>
-    <h2 className="section-title">Let’s build the <br/> <span className="gradient-text">next big thing</span> together.</h2>
-    <p className="section-p">
-      Currently open for new opportunities in Software Development and Data Analysis. 
-      Based in Ontario, Canada.
-    </p>
-    <div className="cta-group">
-      <button className="apple-btn primary" onClick={() => window.location.href='mailto:your-email@example.com'}>
-        Get in touch
-      </button>
-      <button className="apple-btn secondary" onClick={() => window.location.href='/work'}>
-        See all 15+ projects
-      </button>
-    </div>
-  </div>
-</section>
-
-
-<footer className="apple-footer">
-  <div className="container">
-    <div className="footer-bottom">
-      <p>© 2026 {data.name}. Built with React & Purpose.</p>
-      <div className="footer-links">
-        <a href="https://github.com/Shyam-Works" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/shyampatel97" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</footer>
+      <footer className="apple-footer">
+        <div className="container">
+          <div className="footer-bottom">
+            <p>© 2026 {data.name}. Built with React & Purpose.</p>
+            <div className="footer-links">
+              <a href="https://github.com/Shyam-Works" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="https://linkedin.com/in/shyampatel97" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
