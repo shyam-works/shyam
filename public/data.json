@@ -179,32 +179,31 @@
 ],
   "skills": [
   { "name": "HTML", "icon": "fab fa-html5" },
-  { "name": "CSS", "icon": "fab fa-css3-alt" },
-  { "name": "Bootstrap", "icon": "fab fa-bootstrap" },
-  { "name": "Tailwind", "icon": "fab fa-css3-alt" },
-
-  { "name": "JavaScript", "icon": "fa-brands fa-js" },
-  { "name": "React", "icon": "fab fa-react" },
-  { "name": "NextJs", "icon": "fab fa-react" },
-  { "name": "Express", "icon": "fas fa-server" },
-
+    { "name": "JavaScript", "icon": "fa-brands fa-js" },
   { "name": "Python", "icon": "fab fa-python" },
-  { "name": "Pandas", "icon": "fab fa-python" },
-
-  { "name": "Java", "icon": "fa-brands fa-java" },
+    { "name": "Java", "icon": "fa-brands fa-java" },
   { "name": "C", "icon": "fab fa-cuttlefish" },
   { "name": "C++", "icon": "fab fa-cuttlefish" },
 
+
+  { "name": "CSS", "icon": "fab fa-css3-alt" },
+  { "name": "Bootstrap", "icon": "fab fa-bootstrap" },
+  { "name": "Tailwind", "icon": "fab fa-css3-alt" },
+  { "name": "React", "icon": "fab fa-react" },
+  { "name": "NextJs", "icon": "fab fa-react" },
+  { "name": "Express", "icon": "fas fa-server" },
+  { "name": "Node.js", "icon": "fab fa-node-js" },
+  { "name": "Pandas", "icon": "fab fa-python" },
+
+  { "name": "MongoDB", "icon": "fas fa-database" },
   { "name": "SQL", "icon": "fas fa-database" },
   { "name": "DynamoDB", "icon": "fas fa-database" },
-
   { "name": "AWS", "icon": "fab fa-aws" },
   { "name": "Azure", "icon": "fab fa-microsoft" },
   { "name": "Docker", "icon": "fab fa-docker" },
   { "name": "CI/CD", "icon": "fas fa-code-branch" },
-  { "name": "cURL", "icon": "fas fa-terminal" },
+  { "name": "Postman", "icon": "fas fa-vial" },
 
-  { "name": "Jest", "icon": "fas fa-vial" },
 
   { "name": "PowerBI", "icon": "fas fa-chart-bar" },
   { "name": "Tableau", "icon": "fas fa-chart-pie" },
