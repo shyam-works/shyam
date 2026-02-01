@@ -709,3 +709,158 @@ body { font-family: 'Inter', sans-serif; background: var(--apple-bg); color: var
     text-align: center;
   }
 }
+
+/* Sleek Tech Skills */
+.apple-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding-top: 40px;
+  opacity: 0;
+  transition: 1.2s var(--ease);
+}
+
+.apple-skills.active {
+  opacity: 1;
+}
+
+.apple-pill.tech-glow {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--apple-text);
+  position: relative;
+  overflow: hidden; /* Clips the glow inside the pill */
+  transition: all 0.4s var(--ease);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.apple-pill.tech-glow i {
+  transition: transform 0.3s var(--ease);
+}
+
+/* The Magic Glow Effect */
+.apple-pill.tech-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  /* Uses the variable from JS */
+  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.6s var(--ease), height 0.6s var(--ease), opacity 0.4s;
+  z-index: -1;
+  filter: blur(15px);
+}
+
+.apple-pill.tech-glow:hover {
+  border-color: var(--accent-color);
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover State: Icon and Text color change */
+.apple-pill.tech-glow:hover i {
+  transform: scale(1.2) rotate(5deg);
+  color: #fff;
+}
+
+.apple-pill.tech-glow:hover::before {
+  width: 200%; /* Expands the glow */
+  height: 300%;
+  opacity: 0.9; /* Brightness of the glow */
+}
+
+/* Mobile Fix for Glow */
+@media (max-width: 768px) {
+  .apple-pill.tech-glow:hover {
+    transform: none; /* Disable movement on touch */
+  }
+}
+
+/* Sleek Gemini Racing Border */
+.apple-pill.tech-glow {
+  background: #ffffff; /* Normal state */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1d1d1f;
+  position: relative;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  z-index: 1;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* The Animated Border (The moving light) */
+.apple-pill.tech-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%; /* Larger than pill to cover rotation */
+  height: 300%; 
+  background: conic-gradient(
+    transparent, 
+    #8E2DE2, /* Purple */
+    #FDC830, /* Yellow */
+    transparent 30%
+  );
+  transform-origin: center;
+  opacity: 0;
+  z-index: -2;
+}
+
+/* The Solid Black Center */
+.apple-pill.tech-glow::after {
+  content: "";
+  position: absolute;
+  inset: 3px; /* Border thickness */
+  background: #ffffff; /* Default white */
+  border-radius: 100px;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+/* Hover States */
+.apple-pill.tech-glow:hover {
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.apple-pill.tech-glow:hover::before {
+  opacity: 1;
+  animation: rotateBorder 2s linear infinite;
+}
+
+.apple-pill.tech-glow:hover::after {
+  background: #000000; /* Inside turns black on hover */
+}
+
+/* .apple-pill.tech-glow:hover i {
+  color: #0066cc;
+} */
+
+/* Circular Movement Animation */
+@keyframes rotateBorder {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
