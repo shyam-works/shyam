@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+
 import "./Work.css";
 
 const Work = () => {
   const [data, setData] = useState(null);
   const [isVisible, setIsVisible] = useState({});
   const observerRef = useRef(null);
-  const location = useLocation();
+
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
