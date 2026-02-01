@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --apple-blue: #0071e3;
+  --apple-text: #1d1d1f;
+  --apple-bg: #ffffff;
+  --apple-gray: #f5f5f7;
+  --apple-dark: #000000;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-premium: 0 40px 80px rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.work-root { 
+  background: var(--apple-bg); 
+  font-family: 'Plus Jakarta Sans', sans-serif; 
+  overflow-x: hidden;
+  color: var(--apple-text);
+}
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+.work-section { padding: 120px 0; }
+.light-gray { background: var(--apple-gray); }
+
+.work-tag { font-size: 0.85rem; font-weight: 700; color: var(--apple-blue); text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 12px; }
+.work-tag.center { text-align: center; }
+.work-tag.white { color: #fff; opacity: 0.7; }
+
+.work-display-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 50px; }
+.work-display-title.center { text-align: center; }
+.work-display-title.white { color: #fff; }
+
+/* --- 01. JOURNEY ROADMAP --- */
+.roadmap-container { position: relative; max-width: 1000px; margin: 80px auto; padding: 40px 0; }
+.roadmap-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #d2d2d7; transform: translateX(-50%); }
+
+.roadmap-step { position: relative; width: 50%; margin-bottom: 100px; opacity: 0; transition: 1.2s var(--ease); }
+.roadmap-step.active { opacity: 1; transform: translateX(0); }
+.roadmap-step.left { padding-right: 60px; text-align: right; left: 0; transform: translateX(-40px); }
+.roadmap-step.right { padding-left: 60px; left: 50%; transform: translateX(40px); }
+
+.roadmap-dot {
+  position: absolute; top: 10px; width: 40px; height: 40px; background: #fff;
+  border: 2px solid var(--apple-blue); border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.left .roadmap-dot { right: -21px; }
+.right .roadmap-dot { left: -21px; }
+.step-number { font-weight: 800; color: var(--apple-blue); font-size: 0.9rem; }
+
+.roadmap-content { background: var(--apple-gray); padding: 35px; border-radius: 24px; transition: 0.4s var(--ease); }
+.roadmap-step:hover .roadmap-content { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.06); transform: translateY(-5px); }
+
+.roadmap-year { font-weight: 700; color: var(--apple-blue); font-size: 0.8rem; text-transform: uppercase; }
+.roadmap-company { font-weight: 600; color: #86868b; margin: 5px 0 15px; }
+.roadmap-desc { font-size: 1rem; line-height: 1.6; color: #424245; }
+
+/* --- 02. EDITORIAL PROJECTS --- */
+.filter-shelf { display: flex; justify-content: center; gap: 12px; margin: 40px 0 80px; flex-wrap: wrap; }
+.shelf-btn {
+  background: #fff; border: 1px solid #d2d2d7; padding: 10px 24px; border-radius: 100px;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.3s var(--ease);
+}
+.shelf-btn.active { background: var(--apple-text); color: #fff; border-color: var(--apple-text); }
+
+.editorial-project-list { display: flex; flex-direction: column; gap: 150px; }
+.project-row { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; opacity: 0; transform: translateY(40px); transition: 1.2s var(--ease); }
+.project-row.active { opacity: 1; transform: translateY(0); }
+
+.row-reverse { direction: rtl; }
+.row-reverse .project-meta, .row-reverse .project-visual { direction: ltr; }
+
+.image-frame {
+  width: 100%; border-radius: 28px; overflow: hidden; background: #fff;
+  box-shadow: var(--shadow-premium); transition: 0.6s var(--ease);
+}
+.project-row:hover .image-frame { transform: scale(1.02); }
+.image-frame img { width: 100%; height: auto; display: block; }
+
+.meta-cat { font-weight: 700; color: var(--apple-blue); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+.project-meta h3 { font-size: 2.8rem; font-weight: 800; margin: 15px 0; letter-spacing: -1.5px; }
+.project-meta p { color: #6e6e73; font-size: 1.15rem; line-height: 1.6; margin-bottom: 35px; }
+.editorial-link { color: var(--apple-text); text-decoration: none; font-weight: 700; border-bottom: 2px solid #d2d2d7; padding-bottom: 5px; transition: 0.3s; }
+.editorial-link:hover { color: var(--apple-blue); border-color: var(--apple-blue); }
+
+/* --- 03. PHOTOGRAPHY --- */
+.hobby-section-v5 { background: var(--apple-dark); padding: 150px 0; }
+.cat-title-v5 { color: #fff; font-size: 1.8rem; margin: 60px 0 30px; font-weight: 600; opacity: 0.8; }
+
+.organic-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; grid-auto-flow: dense; }
+.organic-item { height: 300px; border-radius: 12px; overflow: hidden; background: #1a1a1a; opacity: 0; transform: translateY(20px); transition: 0.8s var(--ease); }
+.organic-item.fade-up { opacity: 1; transform: translateY(0); }
+.organic-item.panoramic { grid-column: span 2; }
+.organic-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--ease); }
+.organic-item:hover img { transform: scale(1.08); filter: brightness(1.1); }
+
+/* --- LOADER --- */
+.apple-loader { height: 100vh; display: flex; justify-content: center; align-items: center; background: #fff; }
+.apple-loader span { width: 40px; height: 40px; border: 3px solid var(--apple-gray); border-top-color: var(--apple-blue); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 991px) {
+  .roadmap-line { left: 20px; transform: none; }
+  .roadmap-step { width: 100%; left: 0 !important; text-align: left !important; padding-left: 55px !important; transform: translateX(20px); margin-bottom: 60px; }
+  .left .roadmap-dot, .right .roadmap-dot { left: 0 !important; right: auto; }
+  .project-row { grid-template-columns: 1fr; gap: 40px; }
+  .row-reverse { direction: ltr; }
+  .project-meta h3 { font-size: 2.2rem; }
+  .editorial-project-list { gap: 100px; }
+  .work-section { padding: 80px 0; }
+}
