@@ -1,6 +1,6 @@
 {
   "name": "Shyam Patel",
-  "photo": "profile2.jpg",
+  "photo": "profile.jpeg",
   "me": "me.jpg",
   "intro": "Solving complex problems through clean code and data-driven insights. Dedicated to building innovative tools that empower users and drive meaningful growth",
   "education": "Advanced Diploma in Computer Programming - Seneca Polytechnic College",
@@ -126,20 +126,27 @@
     "link": "https://drive.google.com/drive/folders/1Xl49YQ342kZe5KqxVpy7i9egSQII4T-j?usp=sharing"
   }
 ],
-  "experience": [
+"experience": [
   {
-    "role": "STEM Tutor",
-    "company": "Megamind Learning Centre",
-    "duration": "October 2025 - Present",
-    "description": "Teaching Python, Scratch, Web Design, and Roblox game development to students in grades 3–12. I develop engaging, hands-on lessons designed to build programming, problem-solving, and creative thinking skills while guiding students through interactive projects and games to make coding accessible and fun.",
-    "image": "megamind.jpg" 
+    "role": "Web Developer (Volunteer)",
+    "company": "Torrent Power",
+    "duration": "August 2024 - September 2025",
+    "description": "Developed a responsive React application to streamline contractor order management. Implemented categorized part listings and integrated automated email processing, successfully replacing manual systems with a digital workflow and improving operational efficiency for 1000+ orders per month.",
+    "image": "torrent-power.jpg"
   },
   {
-    "role": "Coding Instructor",
-    "company": "Lifetime Skills Academy",
-    "duration": "October 2025 - Present",
-    "description": "Instructing students in grades 1–6 on coding and robotics through hands-on projects using Scratch and LEGO robotics. My goal is to help children develop computational thinking, creativity, and teamwork through fun, project-based learning.",
-    "image": "lifetime.jpg"
+    "role": "Sales Associate",
+    "company": "7-Eleven",
+    "duration": "November 2023 - January 2026",
+    "description": "Developed strong customer service and problem-solving skills in a high-pressure environment. Responsible for cash transactions and addressing customer needs efficiently, skills that directly transfer to technical support and collaborative software development environments.",
+    "image": "7eleven.jpg"
+  },
+  {
+    "role": "QA Tester",
+    "company": "Freelance",
+    "duration": "August 2025 - Jan 2026",
+    "description": "Focused on comprehensive quality assurance using industry-standard tools like Selenium for automated testing and JIRA for bug tracking. Conducted thorough functionality testing, documented bugs with clear reporting, and provided UI/UX improvement suggestions while collaborating closely with cross-functional teams to maintain reliability.",
+    "image": "qa_tester.jpg"
   },
   {
     "role": "Coding Tutor",
@@ -149,18 +156,25 @@
     "image": "studentScholars.jpg"
   },
   {
-    "role": "QA Tester",
-    "company": "Freelance",
-    "duration": "August 2025 - September 2025",
-    "description": "Focused on comprehensive quality assurance using industry-standard tools like Selenium for automated testing and JIRA for bug tracking. Conducted thorough functionality testing, documented bugs with clear reporting, and provided UI/UX improvement suggestions while collaborating closely with cross-functional teams to maintain reliability.",
-    "image": "qa_tester.jpg"
+    "role": "Coding Instructor",
+    "company": "Lifetime Skills Academy",
+    "duration": "October 2025 - Present",
+    "description": "Instructing students in grades 1–6 on coding and robotics through hands-on projects using Scratch and LEGO robotics. My goal is to help children develop computational thinking, creativity, and teamwork through fun, project-based learning.",
+    "image": "lifetime.jpg"
   },
   {
-    "role": "Web Developer (Volunteer)",
-    "company": "Torrent Power",
-    "duration": "March 2025 - April 2025",
-    "description": "Developed a responsive React application to streamline contractor order management. Implemented categorized part listings and integrated automated email processing, successfully replacing manual systems with a digital workflow and improving operational efficiency for 1000+ orders per month.",
-    "image": "torrent-power.jpg"
+    "role": "Sensei (Coding Instructor)",
+    "company": "Code Ninjas",
+    "duration": "April 2026 - Present",
+    "description": "Teaching Block coding, JavaScript, and Unity game development to students in grades 1-7. I create engaging, hands-on lessons that foster creativity and problem-solving skills, guiding students through interactive projects and games to make coding accessible and fun.",
+    "image": "megamind.jpg"
+  },
+  {
+    "role": "STEM Tutor",
+    "company": "Megamind Learning Centre",
+    "duration": "October 2025 - Jan 2026",
+    "description": "Teaching Python, Scratch, Web Design, and Roblox game development to students in grades 3–12. I develop engaging, hands-on lessons designed to build programming, problem-solving, and creative thinking skills while guiding students through interactive projects and games to make coding accessible and fun.",
+    "image": "megamind.jpg"
   },
   {
     "role": "AI Trainer",
@@ -168,13 +182,6 @@
     "duration": "November 2024 - February 2025",
     "description": "Ensuring AI-generated responses are accurate and aligned with user expectations. Responsibilities included reviewing text and code to improve performance, performing code validation, and training models to enhance content analysis and generation capabilities.",
     "image": "outlier.jpg"
-  },
-  {
-    "role": "Sales Associate",
-    "company": "7-Eleven",
-    "duration": "November 2023 - Present",
-    "description": "Developed strong customer service and problem-solving skills in a high-pressure environment. Responsible for cash transactions and addressing customer needs efficiently, skills that directly transfer to technical support and collaborative software development environments.",
-    "image": "7eleven.jpg"
   }
 ],
   "skills": [
