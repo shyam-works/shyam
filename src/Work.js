@@ -25,7 +25,7 @@ const ExperienceSection = ({ experience }) => {
 
   const onScroll = useCallback(() => {
     if (!trackRef.current) return;
-    const { scrollLeft: sl, scrollWidth, clientWidth } = trackRef.current;
+    const { scrollLeft: sl} = trackRef.current;
     const cardWidth = 324;
     const idx = Math.round(sl / cardWidth);
     setActiveIdx(Math.max(0, Math.min(idx, experience.length - 1)));
