@@ -1,866 +1,1098 @@
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&family=Inter:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ============================================================
+   DESIGN TOKENS — Single source of truth
+   ============================================================ */
 :root {
-  --apple-bg: #ffffff;
-  --apple-gray: #f5f5f7;
-  --apple-text: #1d1d1f;
-  --apple-secondary: #86868b;
-  --apple-blue: #0066cc;
+  --bg: #ffffff;
+  --bg-soft: #f7f7f5;
+  --bg-muted: #f0f0ee;
+  --text: #111110;
+  --text-2: #5c5c5a;
+  --text-3: #9b9b97;
+  --blue: #0066cc;
+  --blue-hover: #0055bb;
+  --blue-soft: #e8f1fb;
   --accent: #e94f37;
-  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 100px;
+
+  /* Spring easing — feels physical */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-btn: 0 2px 8px rgba(0, 102, 204, 0.3);
+  --shadow-btn-hover: 0 6px 20px rgba(0, 102, 204, 0.4);
+  --shadow-btn-press: 0 1px 3px rgba(0, 102, 204, 0.2);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--apple-bg); color: var(--apple-text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Custom Cursor */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  cursor: default;
+}
+
+/* ============================================================
+   CUSTOM CURSOR — Magnetic, alive
+   ============================================================ */
 .dot-cursor {
-  width: 12px; height: 12px; background: var(--apple-text); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10000;
-  transition: transform 0.1s var(--ease); mix-blend-mode: difference;
+  width: 10px;
+  height: 10px;
+  background: var(--text);
+  border-radius: 50%;
+  position: fixed;
+  top: -5px;
+  left: -5px;
+  pointer-events: none;
+  z-index: 99999;
+  transition:
+    width 0.25s var(--spring),
+    height 0.25s var(--spring),
+    background 0.2s ease,
+    border-radius 0.25s var(--spring),
+    opacity 0.2s ease;
+  mix-blend-mode: difference;
+  will-change: transform;
 }
 
-/* Hero Section - Added Padding Top to avoid Navbar */
+.dot-cursor.hovering {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.9);
+  mix-blend-mode: normal;
+  opacity: 0.85;
+}
+
+.dot-cursor.clicking {
+  width: 14px;
+  height: 14px;
+  transition: width 0.1s, height 0.1s;
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+.apple-loader {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; background: var(--bg);
+}
+.apple-loader span {
+  width: 44px; height: 44px;
+  border: 2.5px solid var(--bg-muted);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   LAYOUT CONTAINERS
+   ============================================================ */
+.apple-root { position: relative; }
+.container { width: 100%; max-width: 1160px; margin: 0 auto; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--blue);
+  /* background: var(--blue-soft); */
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px;
+}
+.section-tag.center { display: block; text-align: center; }
+
+/* ============================================================
+   BUTTONS — Tactile press physics
+   ============================================================ */
+.apple-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-pill);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: none;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.18s var(--spring),
+    box-shadow 0.18s var(--ease-out),
+    background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  letter-spacing: -0.01em;
+}
+
+/* Ripple layer */
+.apple-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--rx, 50%) var(--ry, 50%), rgba(255,255,255,0.25) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.apple-btn:active::after { opacity: 1; }
+
+/* Primary */
+.apple-btn:not(.secondary) {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+.apple-btn:not(.secondary):hover {
+  background: var(--blue-hover);
+  box-shadow: var(--shadow-btn-hover);
+  transform: translateY(-2px) scale(1.02);
+}
+.apple-btn:not(.secondary):active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: var(--shadow-btn-press);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+/* Secondary */
+.apple-btn.secondary {
+  background: transparent;
+  color: var(--blue);
+  box-shadow: inset 0 0 0 1.5px var(--blue);
+}
+.apple-btn.secondary:hover {
+  background: var(--blue-soft);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: inset 0 0 0 1.5px var(--blue), var(--shadow-md);
+}
+.apple-btn.secondary:active {
+  transform: translateY(1px) scale(0.97);
+  transition: transform 0.08s;
+}
+
+/* Icon chevron bounce */
+.apple-btn .fa-chevron-right {
+  font-size: 0.75rem;
+  transition: transform 0.2s var(--spring);
+}
+.apple-btn:hover .fa-chevron-right {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
 .apple-hero {
   min-height: 100vh;
-  display: grid; 
-  grid-template-columns: 1.2fr 0.8fr;
-  align-items: center; 
-  padding: 100px 10% 40px; /* Increased top padding */
-  gap: 40px;
-}
-
-.hero-title { font-size: clamp(3rem, 6vw, 5rem); font-weight: 700; line-height: 1.05; letter-spacing: -2px; margin-bottom: 25px; }
-.gradient-text { background: linear-gradient(90deg, #1d1d1f, #86868b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-/* Sleek Intro Animation */
-.hero-intro-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 8% 80px;
+  gap: 60px;
+  position: relative;
   overflow: hidden;
-  margin-bottom: 40px;
 }
 
-.hero-intro { 
-  font-size: 1.4rem; 
-  color: var(--apple-secondary); 
-  max-width: 550px; 
-  line-height: 1.5;
+/* Subtle grid texture */
+.apple-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-title {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--blue) 0%, #5599ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-intro-wrapper { overflow: hidden; margin-bottom: 40px; }
+
+.hero-intro {
+  font-size: 1.15rem;
+  color: var(--text-2);
+  max-width: 500px;
+  line-height: 1.65;
+  font-weight: 400;
 }
 
 .sleek-reveal {
-  animation: sleekReveal 1.5s var(--ease) forwards;
+  animation: sleekReveal 1.2s var(--ease-out) 0.3s forwards;
   opacity: 0;
-  transform: translateY(100%);
 }
-
 @keyframes sleekReveal {
-  0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
-  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0);   }
 }
 
-/* Keyword Highlights */
-.highlight-blue {
-  color: var(--apple-blue);
+.hero-cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+/* ============================================================
+   HERO VISUAL — Photo fixed, no white space
+   ============================================================ */
+.hero-visual {
   position: relative;
-  display: inline-block;
-}
-
-.highlight-blue::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(0, 102, 204, 0.1);
-  border-radius: 2px;
-}
-
-.apple-btn {
-  background: var(--apple-blue); color: white; border: none; padding: 14px 28px;
-  border-radius: 100px; font-size: 1.1rem; font-weight: 500; cursor: pointer;
-  transition: 0.3s var(--ease);
-}
-.apple-btn:hover { background: #0077ed; transform: scale(1.05); }
-
-/* The Blob - Refined */
-.apple-blob {
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 1 / 1;
-  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Animation makes it feel premium and "alive" */
-  animation: blob-float 6s ease-in-out infinite;
 }
 
-.apple-blob::before {
+/* Ambient glow behind */
+.hero-visual::before {
   content: '';
   position: absolute;
-  width: 110%;
-  height: 110%;
-  background: linear-gradient(135deg, rgba(0, 102, 204, 0.2) 0%, rgba(0, 102, 204, 0.05) 100%);
-  z-index: -1;
-  /* The "Squircle" morphing effect */
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  animation: morph 12s linear infinite alternate;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(0, 102, 204, 0.12) 0%, transparent 70%);
+  filter: blur(50px);
+  z-index: 0;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.1); }
+}
+
+.apple-blob {
+  width: 380px;
+  height: 380px;
+  position: relative;
+  z-index: 1;
+  animation: blob-float 7s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-16px) rotate(1deg); }
+  66%       { transform: translateY(-8px) rotate(-1deg); }
 }
 
 .apple-blob img {
   width: 100%;
   height: 100%;
+  /* KEY FIX: cover fills the shape, no white gaps */
   object-fit: cover;
-  /* Applying a "mask" to the image to follow the morphing shape */
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s var(--ease);
-  animation: morph 12s linear infinite alternate;
-  filter: saturate(1.1); /* Adds that rich Apple photo look */
-}
-
-/* Hover interaction to slow down the morphing and focus the image */
-.apple-blob:hover img {
-  border-radius: 40px; /* Snaps back to a clean rounded square on hover */
-  animation-play-state: paused;
-  transform: scale(1.02);
-}
-
-/* The Morphing Keyframes */
-@keyframes morph {
-  0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-  25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-  50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-  75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-  100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-}
-
-/* Gentle floating motion */
-@keyframes blob-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* Subtle background accent behind the image */
-.hero-visual {
-  position: relative;
-}
-
-.hero-visual::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 102, 204, 0.15) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  z-index: -2;
-  filter: blur(40px);
-}
-
-/* Section Generic */
-.apple-section { padding: 120px 10%; }
-.dark-bg { background: #000000; color: #fff; }
-.container { width: 100%; max-width: 1200px; margin: 0 auto; }
-.section-tag { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--apple-blue); letter-spacing: 1px; display: block; margin-bottom: 15px; }
-.section-title { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px; letter-spacing: -1.5px; }
-.section-title.white { color: #fff; }
-.center { text-align: center; margin-left: auto; margin-right: auto; }
-
-/* Grid Proportions */
-.apple-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; opacity: 0; transform: translateY(30px); transition: 1s var(--ease); }
-.apple-grid.active { opacity: 1; transform: translateY(0); }
-.apple-portrait { width: 100%; max-width: 420px; border-radius: 20px; transition: 0.8s var(--ease); }
-
-/* Bento Grid 2.0 - Refined Layout */
-.apple-bento {
-  display: grid;
-  /* Creates 3 equal columns */
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.bento-tile {
-  background: #1c1c1e;
-  padding: 40px;
-  border-radius: 32px;
-  transition: 0.5s var(--ease);
-  opacity: 0;
-  transform: translateY(20px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.bento-tile.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.bento-tile:hover {
-  background: #2c2c2e;
-  transform: translateY(-5px);
-}
-
-/* 1st Item: Large (Spans 2 columns) */
-.tile-0 {
-  grid-column: span 2;
-  min-height: 300px;
-}
-.tile-2  {
-  grid-column: span 3;
-  min-height: 300px;
-}
-
-/* 2nd & 3rd Items: Small (Standard 1 column) */
-.tile-1 {
-  grid-column: span 1;
-}
-
-/* 4th Item: Large/Long (Spans 2 columns) */
-.tile-3 {
-  grid-column: span 2;
-  min-height: 300px;
-  /* Optional: Align it to the right if you want a zigzag look */
-  grid-column-start: 2; 
-}
-
-.bento-tile i {
-  font-size: 2.2rem;
-  color: var(--apple-blue);
-  margin-bottom: 24px;
+  object-position: center top;
+  border-radius: 44% 56% 62% 38% / 42% 44% 56% 58%;
+  animation: morph 14s ease-in-out infinite alternate;
   display: block;
 }
 
-.bento-tile h3 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #ffffff;
+.apple-blob::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 44% 56% 62% 38% / 42% 44% 56% 58%;
+  animation: morph 14s ease-in-out infinite alternate;
+  background: linear-gradient(135deg, rgba(0,102,204,0.15) 0%, rgba(0,102,204,0.04) 100%);
+  z-index: -1;
 }
 
-.bento-tile p {
-  font-size: 1.05rem;
-  line-height: 1.5;
-  color: var(--apple-secondary);
-  max-width: 90%;
+@keyframes morph {
+  0%   { border-radius: 44% 56% 62% 38% / 42% 44% 56% 58%; }
+  25%  { border-radius: 58% 42% 38% 62% / 56% 62% 38% 44%; }
+  50%  { border-radius: 38% 62% 56% 44% / 62% 38% 62% 38%; }
+  75%  { border-radius: 62% 38% 44% 56% / 38% 56% 44% 62%; }
+  100% { border-radius: 44% 56% 62% 38% / 42% 44% 56% 58%; }
 }
 
-/* Gallery */
-.apple-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
-.gallery-item { border-radius: 30px; overflow: hidden; background: var(--apple-gray); position: relative; opacity: 0; transform: scale(0.95); transition: 1s var(--ease); }
-.gallery-item.active { opacity: 1; transform: scale(1); }
-.gallery-item img { width: 100%; height: 400px; object-fit: cover; transition: 0.6s var(--ease); }
-.gallery-item:hover img { transform: scale(1.03); }
-.gallery-caption { padding: 30px; background: rgba(255,255,255,0.8); backdrop-filter: blur(15px); position: absolute; bottom: 0; width: 100%; }
-
-/* Skills Pills */
-.apple-skills { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; padding-top: 40px; opacity: 0; transition: 1s; }
-.apple-skills.active { opacity: 1; }
-.apple-pill { background: var(--apple-gray); padding: 15px 30px; border-radius: 100px; font-weight: 600; font-size: 1rem; transition: 0.3s; }
-.apple-pill:hover { background: var(--apple-text); color: #fff; transform: translateY(-5px); }
-
-/* Animations */
-.fade-up { animation: fadeUp 1s var(--ease) forwards; }
-.fade-up-delay-1 { animation: fadeUp 1s var(--ease) 0.2s forwards; opacity: 0; }
-.fade-up-delay-2 { animation: fadeUp 1s var(--ease) 0.4s forwards; opacity: 0; }
-.fade-up-delay-3 { animation: fadeUp 1s var(--ease) 0.6s forwards; opacity: 0; }
-.fade-in-scale { animation: fadeInScale 1s var(--ease) 0.3s forwards; opacity: 0; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-/* Loading */
-.apple-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+.apple-blob:hover img {
+  border-radius: var(--radius-xl);
+  animation-play-state: paused;
+  transform: scale(1.03);
+  transition: border-radius 0.6s var(--spring), transform 0.4s var(--spring);
+}
+.apple-blob:hover::after {
+  animation-play-state: paused;
+  border-radius: var(--radius-xl);
 }
 
-.apple-loader span {
-  width: 48px;
-  height: 48px;
-  border: 3px solid var(--apple-gray);
-  border-top-color: var(--apple-blue);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN - MOBILE FIRST
-   ============================================ */
-
-/* Tablet and below */
-@media (max-width: 1024px) {
-  .apple-hero {
-    padding: 80px 7% 40px;
-    gap: 30px;
-  }
-  
-  .hero-title {
-    font-size: 3.5rem;
-  }
-  
-  .apple-section {
-    padding: 100px 7%;
-  }
-  
-  .section-title {
-    font-size: 3rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  /* Hero Section - Hide visual, center content */
-  .apple-hero { 
-    grid-template-columns: 1fr; 
-    padding: 60px 5% 40px;
-    text-align: center;
-    min-height: auto;
-  }
-  
-  /* Hide hero image on mobile */
-  .hero-visual { 
-    display: none !important;
-  }
-  
-  /* Adjust hero content for mobile */
-  .hero-content {
-    max-width: 100%;
-  }
-  
-  .hero-title { 
-    font-size: 2.5rem;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-  }
-  
-  .hero-intro-wrapper {
-    margin-bottom: 30px;
-  }
-  
-  .hero-intro {
-    font-size: 1.1rem;
-    max-width: 100%;
-    line-height: 1.6;
-  }
-  
-  .hero-cta {
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Section spacing */
-  .apple-section { 
-    padding: 80px 5%; 
-  }
-  
-  /* Grids to single column */
-  .apple-grid { 
-    grid-template-columns: 1fr; 
-    gap: 40px;
-    text-align: center; 
-  }
-  
-  /* Portrait image centering */
-  .apple-img-wrap {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .apple-portrait { 
-    max-width: 300px;
-  }
-  
-  /* Text content */
-  .apple-text-wrap {
-    text-align: center;
-  }
-  
-  .section-title { 
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-  }
-  
-  .section-p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  
-  /* Bento Grid - Stack in single column */
-  .apple-bento { 
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 40px;
-  }
-  
-  .tile-0, .tile-1, .tile-2, .tile-3 { 
-    grid-column: span 1 !important;
-    grid-column-start: auto !important;
-    min-height: auto !important;
-  }
-  
-  .bento-tile {
-    padding: 32px 24px;
-  }
-  
-  .bento-tile h3 {
-    font-size: 1.4rem;
-  }
-  
-  .bento-tile p {
-    font-size: 0.95rem;
-    max-width: 100%;
-  }
-  
-  .bento-tile i {
-    font-size: 2rem;
-  }
-  
-  /* Gallery - Stack vertically */
-  .apple-gallery { 
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-top: 40px;
-  }
-  
-  .gallery-item img {
-    height: 300px;
-  }
-  
-  .gallery-caption {
-    padding: 24px;
-  }
-  
-  .gallery-caption h3 {
-    font-size: 1.3rem;
-  }
-  
-  .gallery-caption p {
-    font-size: 0.95rem;
-  }
-  
-  /* Skills pills */
-  .apple-skills {
-    padding-top: 30px;
-    gap: 12px;
-  }
-  
-  .apple-pill {
-    padding: 12px 20px;
-    font-size: 0.9rem;
-  }
-  
-  /* CTA Button */
-  .apple-btn {
-    padding: 12px 24px;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 280px;
-  }
-  
-  /* Hide custom cursor on mobile */
-  .dot-cursor { 
-    display: none; 
-  }
-}
-
-/* Extra small devices */
-@media (max-width: 480px) {
-  .apple-hero {
-    padding: 50px 5% 30px;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  
-  .hero-intro {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-  }
-  
-  .apple-section {
-    padding: 60px 5%;
-  }
-  
-  .apple-portrait {
-    max-width: 250px;
-  }
-  
-  .bento-tile {
-    padding: 24px 20px;
-  }
-  
-  .bento-tile h3 {
-    font-size: 1.2rem;
-  }
-  
-  .bento-tile p {
-    font-size: 0.9rem;
-  }
-  
-  .gallery-item img {
-    height: 250px;
-  }
-  
-  .gallery-caption {
-    padding: 20px;
-  }
-  
-  .gallery-caption h3 {
-    font-size: 1.1rem;
-  }
-  
-  .apple-pill {
-    padding: 10px 16px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Landscape mobile optimization */
-@media (max-width: 768px) and (orientation: landscape) {
-  .apple-hero {
-    min-height: auto;
-    padding: 40px 5%;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-  }
-}
-
-/* Projects Highlight Bar */
+/* ============================================================
+   STATS BAR
+   ============================================================ */
 .apple-stats-bar {
   display: flex;
   justify-content: center;
-  margin-top: -60px; /* Pulls it up slightly into the hero whitespace */
+  padding: 0 8%;
+  margin-top: -32px;
   position: relative;
-  z-index: 10;
-  padding: 0 10%;
+  z-index: 20;
 }
 
 .stats-container {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 12px 30px;
-  border-radius: 100px;
-  display: flex;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
   align-items: center;
-  gap: 30px;
-  cursor: pointer;
-  transition: 0.4s var(--ease);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+  gap: 28px;
+  cursor: none;
+  transition: transform 0.3s var(--spring), box-shadow 0.3s var(--ease-out), border-color 0.2s;
+  box-shadow: var(--shadow-sm);
+  user-select: none;
 }
 
 .stats-container:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: #fff;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-  border-color: var(--apple-blue);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 102, 204, 0.2);
 }
 
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.stats-container:active {
+  transform: translateY(0) scale(0.98);
+  transition: transform 0.1s;
 }
+
+.stat-item { display: flex; align-items: center; gap: 10px; }
 
 .stat-number {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: var(--apple-text);
-  letter-spacing: -1px;
+  color: var(--text);
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
-
-.stat-number .plus {
-  color: var(--apple-blue);
-}
+.stat-number .plus { color: var(--blue); }
 
 .stat-label {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: var(--apple-secondary);
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-
-.stat-label span {
-  transition: 0.3s;
+.stat-label-arrow {
   display: inline-block;
+  transition: transform 0.2s var(--spring), color 0.2s;
+  color: var(--text-3);
+}
+.stats-container:hover .stat-label-arrow {
+  transform: translateX(4px);
+  color: var(--blue);
 }
 
-.stats-container:hover .stat-label span {
-  transform: translateX(5px);
-  color: var(--apple-blue);
+.stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 1px;
 }
 
 .stat-badge {
-  background: #e8f2ff;
-  color: var(--apple-blue);
-  font-size: 0.75rem;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 100px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  position: relative;
+}
+/* Pulsing green dot */
+.stat-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  margin-right: 7px;
+  animation: status-pulse 2s ease-in-out infinite;
+  vertical-align: middle;
+  margin-bottom: 1px;
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
 }
 
-/* Mobile Fix for Stats */
-@media (max-width: 768px) {
-  .apple-stats-bar {
-    margin-top: 20px;
-    padding: 0 5%;
-  }
-  .stats-container {
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    border-radius: 24px;
-    width: 100%;
-  }
-  .stat-badge {
-    order: -1;
-  }
+/* ============================================================
+   SECTIONS — Generic
+   ============================================================ */
+.apple-section { padding: 120px 8%; }
+.dark-bg { background: #0a0a0a; color: #fff; }
+.section-title {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.section-title.center { text-align: center; }
+.section-title.white { color: #fff; }
+.section-p {
+  font-size: 1.05rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 560px;
+}
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.apple-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 80px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.apple-grid.active { opacity: 1; transform: translateY(0); }
+
+.apple-img-wrap { position: relative; }
+
+.apple-portrait {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  display: block;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s var(--spring), box-shadow 0.4s;
+}
+.apple-portrait:hover {
+  transform: scale(1.02) rotate(-0.5deg);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.14);
 }
 
+.highlight-blue {
+  color: var(--blue);
+  position: relative;
+  display: inline-block;
+}
+.highlight-blue::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--blue-soft);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--spring);
+}
+.apple-grid.active .highlight-blue::after { transform: scaleX(1); transition-delay: 0.5s; }
 
-/* Final CTA Section */
+/* ============================================================
+   BENTO GRID — Services
+   ============================================================ */
+.apple-bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.bento-tile {
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 40px 36px;
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out),
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.3s var(--spring);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer line on hover */
+.bento-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s var(--ease-out);
+}
+.bento-tile:hover::before { left: 150%; }
+
+.bento-tile.active { opacity: 1; transform: translateY(0); }
+.bento-tile:nth-child(1) { transition-delay: 0s; }
+.bento-tile:nth-child(2) { transition-delay: 0.1s; }
+.bento-tile:nth-child(3) { transition-delay: 0.2s; }
+
+.bento-tile:hover {
+  background: #1c1c1c;
+  border-color: rgba(0, 102, 204, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,102,204,0.1) inset;
+}
+
+.tile-0 { grid-column: span 2; }
+.tile-1 { grid-column: span 1; }
+.tile-2 { grid-column: span 3; }
+.tile-3 { grid-column: span 2; grid-column-start: 2; }
+
+.bento-tile i {
+  font-size: 1.8rem;
+  color: var(--blue);
+  margin-bottom: 24px;
+  display: block;
+  transition: transform 0.3s var(--spring);
+}
+.bento-tile:hover i { transform: scale(1.15) rotate(-3deg); }
+
+.bento-tile h3 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+.bento-tile p {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.45);
+  max-width: 88%;
+}
+
+/* ============================================================
+   SKILLS PILLS — Magnetic, animated border
+   ============================================================ */
+.apple-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding-top: 48px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.apple-skills.active { opacity: 1; transform: translateY(0); }
+
+.apple-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.1);
+  transition:
+    transform 0.25s var(--spring),
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s,
+    box-shadow 0.25s var(--ease-out);
+  user-select: none;
+  letter-spacing: -0.01em;
+}
+
+.apple-pill i {
+  font-size: 0.9rem;
+  transition: transform 0.3s var(--spring);
+}
+
+.apple-pill:hover {
+  transform: translateY(-5px) scale(1.04);
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: 0 8px 20px rgba(0,102,204,0.12);
+}
+.apple-pill:hover i { transform: scale(1.25) rotate(-5deg); }
+
+.apple-pill:active {
+  transform: translateY(-2px) scale(1.01);
+  transition: transform 0.08s;
+}
+
+/* Stagger pill entry */
+.apple-skills.active .apple-pill {
+  animation: pill-in 0.5s var(--spring) both;
+}
+.apple-skills.active .apple-pill:nth-child(1)  { animation-delay: 0.00s; }
+.apple-skills.active .apple-pill:nth-child(2)  { animation-delay: 0.03s; }
+.apple-skills.active .apple-pill:nth-child(3)  { animation-delay: 0.06s; }
+.apple-skills.active .apple-pill:nth-child(4)  { animation-delay: 0.09s; }
+.apple-skills.active .apple-pill:nth-child(5)  { animation-delay: 0.12s; }
+.apple-skills.active .apple-pill:nth-child(6)  { animation-delay: 0.15s; }
+.apple-skills.active .apple-pill:nth-child(7)  { animation-delay: 0.18s; }
+.apple-skills.active .apple-pill:nth-child(8)  { animation-delay: 0.21s; }
+.apple-skills.active .apple-pill:nth-child(9)  { animation-delay: 0.24s; }
+.apple-skills.active .apple-pill:nth-child(10) { animation-delay: 0.27s; }
+.apple-skills.active .apple-pill:nth-child(n+11) { animation-delay: 0.30s; }
+
+@keyframes pill-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   GALLERY / ACHIEVEMENTS
+   ============================================================ */
+.apple-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.gallery-item {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-soft);
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--spring),
+    box-shadow 0.4s;
+  cursor: none;
+}
+.gallery-item:nth-child(2) { transition-delay: 0.15s; }
+.gallery-item.active { opacity: 1; transform: translateY(0) scale(1); }
+
+.gallery-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px) scale(1.01);
+}
+.gallery-item:active { transform: translateY(-2px) scale(0.99); transition: transform 0.1s; }
+
+.gallery-item img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out);
+}
+.gallery-item:hover img { transform: scale(1.05); }
+
+.gallery-caption {
+  padding: 28px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(0);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.gallery-caption h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.gallery-caption p { font-size: 0.88rem; color: var(--text-2); }
+
+/* ============================================================
+   FOOTER CTA
+   ============================================================ */
 .footer-cta {
-  padding: 150px 10%;
-  background: var(--apple-gray);
-  border-radius: 60px 60px 0 0; /* Creates a smooth curve from the white section */
-  margin-top: 50px;
+  padding: 140px 8% 120px;
+  background: var(--bg-soft);
+  border-radius: 56px 56px 0 0;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Subtle radial accent */
+.footer-cta::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(0,102,204,0.06) 0%, transparent 70%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.footer-cta .container { position: relative; z-index: 1; }
+.footer-cta .section-title { color: var(--text); }
+.footer-cta .section-p { margin: 0 auto 0; max-width: 480px; text-align: center; }
 
 .cta-group {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
   margin-top: 40px;
+  flex-wrap: wrap;
 }
 
-.apple-btn.secondary {
-  background: transparent;
-  color: var(--apple-blue);
-  border: 1px solid var(--apple-blue);
+.footer-cta .container.active .section-title {
+  animation: fadeUp 0.8s var(--ease-out) both;
+}
+.footer-cta .container.active .section-p {
+  animation: fadeUp 0.8s var(--ease-out) 0.1s both;
+}
+.footer-cta .container.active .cta-group {
+  animation: fadeUp 0.8s var(--ease-out) 0.2s both;
 }
 
-.apple-btn.secondary:hover {
-  background: rgba(0, 102, 204, 0.05);
-}
-
-/* Minimal Footer */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .apple-footer {
-  padding: 40px 10%;
-  background: var(--apple-gray);
-  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: 36px 8%;
+  background: var(--bg-soft);
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
-
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
-  color: var(--apple-secondary);
+  font-size: 0.85rem;
+  color: var(--text-3);
 }
-
-.footer-links {
-  display: flex;
-  gap: 25px;
-}
-
+.footer-links { display: flex; gap: 28px; }
 .footer-links a {
-  color: var(--apple-secondary);
+  color: var(--text-3);
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: color 0.2s, transform 0.2s var(--spring);
+  display: inline-block;
+}
+.footer-links a:hover { color: var(--text); transform: translateY(-2px); }
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.footer-links a:hover {
-  color: var(--apple-blue);
+.fade-up-delay-1 { animation: fadeUp 0.9s var(--ease-out) 0.1s both; }
+.fade-up-delay-2 { animation: fadeUp 0.9s var(--ease-out) 0.25s both; }
+.fade-up-delay-3 { animation: fadeUp 0.9s var(--ease-out) 0.4s both; }
+.fade-in-scale   { animation: fadeInScale 1s var(--ease-out) 0.2s both; }
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* Mobile Fixes */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .apple-hero { padding: 100px 6% 60px; gap: 40px; }
+  .apple-section { padding: 100px 6%; }
+  .footer-cta { padding: 100px 6%; }
+  .apple-blob { width: 320px; height: 320px; }
+  .apple-bento { grid-template-columns: repeat(2, 1fr); }
+  .tile-0 { grid-column: span 2; }
+  .tile-2 { grid-column: span 2; }
+  .tile-3 { grid-column: span 2; grid-column-start: auto; }
+}
+
 @media (max-width: 768px) {
-  .footer-cta {
-    padding: 100px 5%;
-    border-radius: 40px 40px 0 0;
-  }
-  .cta-group {
-    flex-direction: column;
-    align-items: center;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    gap: 20px;
+  body { cursor: auto; }
+  .dot-cursor { display: none; }
+
+  .apple-hero {
+    grid-template-columns: 1fr;
+    padding: 80px 5% 40px;
     text-align: center;
+    gap: 0;
   }
+  .hero-visual { display: none; }
+  .hero-cta { justify-content: center; }
+  .hero-intro { max-width: 100%; }
+  .hero-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+
+  .apple-section { padding: 80px 5%; }
+  .footer-cta { padding: 80px 5%; border-radius: 36px 36px 0 0; }
+
+  .apple-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .apple-img-wrap { display: flex; justify-content: center; }
+  .apple-portrait { max-width: 280px; }
+
+  .apple-bento { grid-template-columns: 1fr; }
+  .tile-0, .tile-1, .tile-2, .tile-3 {
+    grid-column: span 1 !important;
+    grid-column-start: auto !important;
+  }
+  .bento-tile { padding: 28px 24px; }
+
+  .apple-gallery { grid-template-columns: 1fr; }
+  .gallery-item img { height: 280px; }
+
+  .apple-stats-bar { padding: 0 5%; margin-top: 24px; }
+  .stats-container { flex-direction: column; gap: 12px; padding: 20px 24px; border-radius: var(--radius-xl); width: 100%; }
+
+  .cta-group { flex-direction: column; align-items: center; }
+  .apple-btn { width: 100%; max-width: 300px; justify-content: center; }
+
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
 
-/* Sleek Tech Skills */
-.apple-skills {
+@media (max-width: 480px) {
+  .apple-hero { padding: 70px 5% 32px; }
+  .hero-title { font-size: 2rem; }
+  .section-title { font-size: 1.9rem; }
+  .apple-section { padding: 64px 5%; }
+}
+
+
+.certs-section {
+  padding: 100px 8%;
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+ 
+.certs-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+ 
+/* ── Track ── */
+.certs-track-outer {
+  position: relative;
+}
+ 
+/* Fade edges */
+.certs-track-outer::before,
+.certs-track-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.certs-track-outer::before { left: 0;  background: linear-gradient(to right, var(--bg-soft) 20%, transparent); }
+.certs-track-outer::after  { right: 0; background: linear-gradient(to left,  var(--bg-soft) 20%, transparent); }
+ 
+.certs-track {
+  display: flex;
+  gap: 18px;
+  padding: 16px 4px 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+}
+.certs-track::-webkit-scrollbar { display: none; }
+.certs-track.dragging { cursor: grabbing; scroll-snap-type: none; }
+ 
+/* ── Individual cert card ── */
+.cert-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 26px 24px 22px;
+  position: relative;
+  transition:
+    transform 0.3s var(--spring),
+    border-color 0.25s,
+    box-shadow 0.3s var(--ease-out);
+  cursor: pointer;
+}
+.cert-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(0,102,204,0.22);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,102,204,0.08);
+}
+.cert-card:active {
+  transform: translateY(-1px) scale(0.98);
+  transition-duration: 0.1s;
+}
+ 
+/* Issuer logo / icon area */
+.cert-issuer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+ 
+.cert-issuer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+ 
+/* Issuer colour variants */
+.cert-issuer-badge.mongodb  { background: #e8f7ee; color: #00684a; }
+.cert-issuer-badge.linkedin { background: #e8f0fb; color: #0a66c2; }
+.cert-issuer-badge.analyst  { background: #fff3e8; color: #c35a00; }
+.cert-issuer-badge.microsoft{ background: #f0eeff; color: #5c35ca; }
+ 
+/* Small issuer dot */
+.cert-issuer-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+ 
+.cert-date {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0.3px;
+}
+ 
+.cert-name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+ 
+/* Skill tags */
+.cert-skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 6px;
+}
+ 
+.cert-skill-tag {
+  font-size: 0.67rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--bg-muted);
+  color: var(--text-2);
+  letter-spacing: 0.2px;
+  transition: background 0.2s, color 0.2s;
+}
+.cert-card:hover .cert-skill-tag {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+ 
+/* Verified tick — top right corner */
+.cert-verified {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #e8f7ee;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem;
+  color: #00684a;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s, transform 0.3s var(--spring);
+}
+.cert-card:hover .cert-verified {
+  opacity: 1;
+  transform: scale(1);
+}
+ 
+/* ── Scroll progress ── */
+.certs-progress {
+  display: flex;
   justify-content: center;
-  padding-top: 40px;
-  opacity: 0;
-  transition: 1.2s var(--ease);
+  gap: 7px;
+  margin-top: 28px;
 }
-
-.apple-skills.active {
-  opacity: 1;
+.certs-progress-dot {
+  width: 6px; height: 6px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.12);
+  transition: width 0.3s var(--spring), background 0.3s;
+  cursor: pointer;
 }
-
-.apple-pill.tech-glow {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 14px 28px;
-  border-radius: 100px;
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--apple-text);
-  position: relative;
-  overflow: hidden; /* Clips the glow inside the pill */
-  transition: all 0.4s var(--ease);
-  cursor: default;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 1;
+.certs-progress-dot.active {
+  width: 20px;
+  background: var(--blue);
 }
-
-.apple-pill.tech-glow i {
-  transition: transform 0.3s var(--ease);
+ 
+/* ── Drag hint ── */
+.certs-hint {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-3);
+  margin-top: 10px;
+  transition: opacity 0.4s;
 }
-
-/* The Magic Glow Effect */
-.apple-pill.tech-glow::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  /* Uses the variable from JS */
-  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: width 0.6s var(--ease), height 0.6s var(--ease), opacity 0.4s;
-  z-index: -1;
-  filter: blur(15px);
-}
-
-.apple-pill.tech-glow:hover {
-  border-color: var(--accent-color);
-  color: #fff;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Hover State: Icon and Text color change */
-.apple-pill.tech-glow:hover i {
-  transform: scale(1.2) rotate(5deg);
-  color: #fff;
-}
-
-.apple-pill.tech-glow:hover::before {
-  width: 200%; /* Expands the glow */
-  height: 300%;
-  opacity: 0.9; /* Brightness of the glow */
-}
-
-/* Mobile Fix for Glow */
+.certs-hint.hidden { opacity: 0; }
+ 
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .apple-pill.tech-glow:hover {
-    transform: none; /* Disable movement on touch */
-  }
+  .certs-section { padding: 80px 5%; }
+  .cert-card { flex: 0 0 230px; }
 }
-
-/* Sleek Gemini Racing Border */
-.apple-pill.tech-glow {
-  background: #ffffff; /* Normal state */
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: #1d1d1f;
-  position: relative;
-  padding: 14px 28px;
-  border-radius: 100px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  z-index: 1;
-  overflow: hidden;
-  cursor: default;
-}
-
-/* The Animated Border (The moving light) */
-.apple-pill.tech-glow::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150%; /* Larger than pill to cover rotation */
-  height: 300%; 
-  background: conic-gradient(
-    transparent, 
-    #8E2DE2, /* Purple */
-    #FDC830, /* Yellow */
-    transparent 30%
-  );
-  transform-origin: center;
-  opacity: 0;
-  z-index: -2;
-}
-
-/* The Solid Black Center */
-.apple-pill.tech-glow::after {
-  content: "";
-  position: absolute;
-  inset: 3px; /* Border thickness */
-  background: #ffffff; /* Default white */
-  border-radius: 100px;
-  z-index: -1;
-  transition: background 0.3s ease;
-}
-
-/* Hover States */
-.apple-pill.tech-glow:hover {
-  color: #ffffff;
-  border-color: transparent;
-}
-
-.apple-pill.tech-glow:hover::before {
-  opacity: 1;
-  animation: rotateBorder 2s linear infinite;
-}
-
-.apple-pill.tech-glow:hover::after {
-  background: #000000; /* Inside turns black on hover */
-}
-
-/* .apple-pill.tech-glow:hover i {
-  color: #0066cc;
-} */
-
-/* Circular Movement Animation */
-@keyframes rotateBorder {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
+ 

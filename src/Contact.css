@@ -1,204 +1,495 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --apple-blue: #0071e3;
-  --apple-text: #1d1d1f;
-  --apple-bg: #ffffff;
-  --apple-gray: #f5f5f7;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --blue: #0071e3;
+  --text: #1d1d1f;
+  --bg: #ffffff;
+  --gray: #f5f5f7;
+  --mid-gray: #e8e8ed;
+  --soft-gray: #6e6e73;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Terminal palette (matches Work.css) */
+  --term-bg: #080810;
+  --term-surface: #0f0f1a;
+  --term-border: rgba(255,255,255,0.07);
+  --term-green: #00ff88;
+  --term-blue: #4d9fff;
+  --term-purple: #b084ff;
+  --term-amber: #ffb84d;
+  --term-dim: rgba(255,255,255,0.35);
+  --term-text: rgba(255,255,255,0.85);
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ══════════════════════════════════════════════════
+   ROOT — Split layout: white left / terminal right
+══════════════════════════════════════════════════ */
 .contact-root {
   min-height: 100vh;
-  background: var(--apple-bg);
   font-family: 'Plus Jakarta Sans', sans-serif;
-  display: flex;
-  align-items: center;
-  padding: 100px 0;
-  overflow-x: hidden;
-}
-
-.contact-editorial-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  align-items: center;
+  overflow: hidden;
+  color: var(--text);
 }
 
-/* LEFT SIDE: EDITORIAL */
+/* ══════════════════════════════════════════════════
+   LEFT SIDE — White editorial (matches Experience section)
+══════════════════════════════════════════════════ */
+.contact-visual-side {
+  background: var(--bg);
+  padding: 80px 60px 80px 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grid texture (matches terminal section grid) */
+.contact-visual-side::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--mid-gray) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mid-gray) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
 .contact-tag {
-  color: var(--apple-blue);
+  font-size: 0.75rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--blue);
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  position: relative;
 }
 
 .contact-display-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
+  line-height: 1.08;
+  letter-spacing: -2.5px;
+  margin-bottom: 24px;
+  position: relative;
 }
 
-.blue-text { color: var(--apple-blue); }
+.blue-text { color: var(--blue); }
 
 .contact-intro {
-  font-size: 1.2rem;
-  color: #6e6e73;
-  line-height: 1.6;
-  margin-bottom: 50px;
+  font-size: 1rem;
+  color: var(--soft-gray);
+  line-height: 1.7;
+  margin-bottom: 52px;
+  max-width: 400px;
+  position: relative;
+}
+
+/* ── Contact method items (matches exp-card feel) ── */
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 48px;
+  position: relative;
 }
 
 .method-item {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--mid-gray);
+  transition: transform 0.35s var(--ease-spring);
+  cursor: default;
 }
+.method-item:first-child { border-top: 1px solid var(--mid-gray); }
+.method-item:hover { transform: translateX(6px); }
 
-.method-item i {
-  width: 50px;
-  height: 50px;
-  background: var(--apple-gray);
+.method-icon-wrap {
+  width: 44px;
+  height: 44px;
+  background: var(--gray);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--apple-blue);
-  font-size: 1.2rem;
+  color: var(--blue);
+  font-size: 1rem;
+  flex-shrink: 0;
+  border: 1px solid var(--mid-gray);
+  transition: background 0.25s var(--ease-smooth), border-color 0.25s;
+}
+.method-item:hover .method-icon-wrap {
+  background: rgba(0,113,227,0.06);
+  border-color: rgba(0,113,227,0.2);
 }
 
-.method-item span {
+.method-text span {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #86868b;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.method-item p {
-  font-size: 1.1rem;
   font-weight: 700;
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.social-presence span {
+.method-text p {
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #86868b;
-  font-size: 0.9rem;
-  margin-bottom: 15px;
+  margin: 0;
+  color: var(--text);
+}
+
+/* ── Social pills ── */
+.social-presence {
+  position: relative;
+}
+
+.social-presence > span {
   display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .social-pills {
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 
 .social-pills a {
-  width: 45px;
-  height: 45px;
-  background: var(--apple-text);
+  width: 40px;
+  height: 40px;
+  background: var(--text);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: 0.3s var(--ease);
+  font-size: 0.95rem;
+  transition: background 0.25s var(--ease-smooth), transform 0.35s var(--ease-spring);
 }
-
 .social-pills a:hover {
-  background: var(--apple-blue);
-  transform: translateY(-5px);
+  background: var(--blue);
+  transform: translateY(-5px) scale(1.08);
+}
+.social-pills a:active {
+  transform: scale(0.92);
+  transition-duration: 0.1s;
 }
 
-/* RIGHT SIDE: THE FORM */
-.apple-form {
-  background: var(--apple-gray);
-  padding: 50px;
-  border-radius: 32px;
+/* ══════════════════════════════════════════════════
+   RIGHT SIDE — Terminal dark (matches Projects section)
+══════════════════════════════════════════════════ */
+.contact-form-side {
+  background: var(--term-bg);
+  padding: 80px 7% 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.input-group {
-  margin-bottom: 25px;
+/* Grid texture */
+.contact-form-side::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 
-.input-group label {
-  display: block;
+/* Ambient glows (matches term-glow) */
+.contact-form-side::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: #4d9fff;
+  filter: blur(100px);
+  opacity: 0.07;
+  top: -80px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.contact-glow-bottom {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #b084ff;
+  filter: blur(90px);
+  opacity: 0.07;
+  bottom: -60px;
+  left: -60px;
+  pointer-events: none;
+}
+
+/* ── Terminal window wrapper ── */
+.contact-terminal-window {
+  background: var(--term-surface);
+  border: 1px solid var(--term-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* Titlebar */
+.contact-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--term-border);
+}
+.ct-dot { width: 12px; height: 12px; border-radius: 50%; }
+.ct-dot.red    { background: #ff5f57; }
+.ct-dot.yellow { background: #febc2e; }
+.ct-dot.green  { background: #28c840; }
+.ct-title-text {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--term-dim);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Form body */
+.contact-form-body {
+  padding: 28px 24px 24px;
+}
+
+/* Status messages */
+.contact-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  color: var(--apple-text);
+  border: 1px solid transparent;
+  animation: status-in 0.3s var(--ease-spring);
+}
+@keyframes status-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.contact-status.success {
+  background: rgba(0,255,136,0.07);
+  border-color: rgba(0,255,136,0.2);
+  color: var(--term-green);
+}
+.contact-status.error {
+  background: rgba(255,95,87,0.07);
+  border-color: rgba(255,95,87,0.2);
+  color: #ff5f57;
+}
+.contact-status i { font-size: 1rem; }
+
+/* Input groups — terminal style */
+.ct-input-group {
+  margin-bottom: 18px;
 }
 
-.input-group input, .input-group textarea {
-  width: 100%;
-  background: #fff;
-  border: 1px solid #d2d2d7;
-  padding: 16px 20px;
-  border-radius: 14px;
-  font-family: inherit;
-  font-size: 1rem;
-  transition: 0.3s var(--ease);
+.ct-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--term-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.22s var(--ease-smooth), box-shadow 0.22s var(--ease-smooth);
+}
+.ct-input-row:focus-within {
+  border-color: rgba(0,255,136,0.3);
+  box-shadow: 0 0 0 3px rgba(0,255,136,0.07);
 }
 
-.input-group input:focus, .input-group textarea:focus {
-  outline: none;
-  border-color: var(--apple-blue);
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+.ct-prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--term-green);
+  padding: 0 12px 0 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0.8;
+  user-select: none;
 }
 
-.apple-submit-btn {
-  width: 100%;
-  background: var(--apple-blue);
-  color: white;
+.ct-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--term-dim);
+  padding: 0 10px 0 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ct-input-row input,
+.ct-input-row textarea {
+  flex: 1;
+  background: transparent;
   border: none;
-  padding: 18px;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 1rem;
+  outline: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  color: #fff;
+  padding: 14px 16px 14px 0;
+  caret-color: var(--term-green);
+  resize: none;
+}
+.ct-input-row input::placeholder,
+.ct-input-row textarea::placeholder {
+  color: rgba(255,255,255,0.18);
+}
+
+.ct-input-row textarea {
+  padding-top: 16px;
+  min-height: 110px;
+  line-height: 1.6;
+  align-self: stretch;
+}
+
+/* Textarea prompt sits at top */
+.ct-input-row.textarea-row {
+  align-items: flex-start;
+  padding-top: 14px;
+}
+.ct-input-row.textarea-row .ct-prompt,
+.ct-input-row.textarea-row .ct-label {
+  padding-top: 0;
+}
+.ct-input-row.textarea-row textarea {
+  padding-top: 0;
+}
+
+/* Submit button — matches terminal aesthetic */
+.ct-submit-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(0,255,136,0.3);
+  color: var(--term-green);
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s var(--ease);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition:
+    background 0.22s var(--ease-smooth),
+    border-color 0.22s var(--ease-smooth),
+    transform 0.35s var(--ease-spring),
+    box-shadow 0.25s var(--ease-smooth);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
 }
-
-.apple-submit-btn:hover {
-  background: #0077ed;
+.ct-submit-btn:hover {
+  background: rgba(0,255,136,0.08);
+  border-color: var(--term-green);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2);
+  box-shadow: 0 8px 24px rgba(0,255,136,0.12);
+}
+.ct-submit-btn:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+.ct-submit-btn .ct-send-arrow {
+  transition: transform 0.35s var(--ease-spring);
+}
+.ct-submit-btn:hover .ct-send-arrow {
+  transform: translate(3px, -3px);
 }
 
-/* STATUS MESSAGES */
-.apple-status {
-  padding: 20px;
-  border-radius: 14px;
-  margin-bottom: 30px;
+/* Status bar at bottom */
+.contact-statusbar {
   display: flex;
   align-items: center;
-  gap: 15px;
-  font-weight: 600;
+  gap: 10px;
+  padding: 10px 18px;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--term-border);
+}
+.ct-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--term-green);
+  box-shadow: 0 0 8px var(--term-green);
+  animation: pulse-glow 2s ease infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-glow {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.8); }
+}
+.ct-status-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--term-dim);
+}
+.ct-status-time {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.15);
 }
 
-.apple-status.success { background: #eefdf3; color: #1e7e34; }
-.apple-status.error { background: #fdf2f2; color: #dc3545; }
-
-/* MOBILE RESPONSIVE */
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
 @media (max-width: 991px) {
-  .contact-editorial-container {
+  .contact-root {
     grid-template-columns: 1fr;
-    gap: 60px;
+    min-height: auto;
   }
-  .apple-form { padding: 30px; }
-  .contact-root { padding: 80px 0; }
+  .contact-visual-side {
+    padding: 80px 7% 60px;
+  }
+  .contact-form-side {
+    padding: 60px 7% 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-display-title { letter-spacing: -1.5px; }
+  .ct-prompt { display: none; }
+  .ct-label { padding-left: 14px; }
 }
